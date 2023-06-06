@@ -44,7 +44,7 @@
                     <tr>
                         <th>Id</th>
                         <th>Name</th>
-                        <th>Slug</th>
+                        <th>Category</th>
                         <th>Image</th>
                         <th></th>
                     </tr>
@@ -54,12 +54,12 @@
                         <tr>
                             <td>{{$record->id}}</td>
                             <td>{{$record->name}}</td>
-                            <td>{{$record->slug}}</td>
+                            <td>{{$record->category->name}}</td>
                             <td>
-                                <img src="{{asset('admin/image/'.$record->image)}}" alt="Image" width="300">
+                                <img src="{{asset('admin/foodimage/'.$record->image)}}" alt="Image" width="300">
                             </td>
                             <td>
-                                <a href="{{url('/dashboard/dynamic-edit/edit-category/'.$record->id)}}" ><button class="btn btn-primary">Edit</button></a>
+                                <a href="{{url('/dashboard/dynamic-edit/edit-foods/'.$record->id)}}" ><button class="btn btn-primary">Edit</button></a>
                                 <a href="{{url('/dashboard/dynamic-edit/delete-category/'.$record->id)}}" ><button class="btn btn-danger">Delete</button></a>
                             </td>
                         </tr>

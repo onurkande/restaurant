@@ -2,19 +2,17 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h4>Add food</h4>
+            <h4>Edit food</h4>
         </div>
+        {{-- {{dd($records)}} --}}
         <div class="card-body">
-            <form action="{{url('dashboard/dynamic-edit/insert-foods')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{url('dashboard/dynamic-edit/update-foods/'.$records->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
-
+                @method('PUT')
                 <div class="row">
                     <div class="col-md-12 mb-3">
-                        <select class="form-select" name="cate_id">
-                            <option value="">Select a Category</option>
-                            @foreach ($records as $record)
-                                <option value="{{$record->id}}">{{ $record->name }}</option>
-                            @endforeach
+                        <select class="form-select">
+                            <option value="">{{$records->category->name}}</option>
                         </select>
                     </div>
                 </div>
@@ -22,15 +20,15 @@
                 <div class="row">
                     <div class="col-md-6">
                         <label for="">Name</label>
-                        <input type="text" class="form-control" name="name">
+                        <input type="text" class="form-control" name="name" value="{{$records->name}}">
                     </div>
                     <div class="col-md-6">
                         <label for="">title</label>
-                        <input type="text" class="form-control" name="title">
+                        <input type="text" class="form-control" name="title" value="{{$records->title}}">
                     </div>
                     <div class="col-md-6">
                         <label for="">slug</label>
-                        <input type="text" class="form-control" name="slug">
+                        <input type="text" class="form-control" name="slug" value="{{$records->slug}}">
                     </div>
                 </div>
 
@@ -38,30 +36,28 @@
 
                 <label for="">Price</label>
                 <div class="row">
-                    <div class="col-md-6">
-                        <input type="number" placeholder="Large Size Price" class="form-control" name="price[]">
-                    </div>
-                    <div class="col-md-6">
-                        <input type="number" placeholder="Medium Size Price" class="form-control" name="price[]">
-                    </div>
-                    <div class="col-md-6">
-                        <input type="number" placeholder="Smoll Size Price" class="form-control" name="price[]">
-                    </div>
+                    @php
+                        $price=json_decode($records->price, TRUE);
+                    @endphp
+                    @foreach($price as $single)
+                        <div class="col-md-6">
+                            <input type="number" class="form-control" name="price[]" value="{{$single}}">
+                        </div>
+                    @endforeach
                 </div>
 
                 <br>
 
                 <label for="">Old Price</label>
                 <div class="row">
-                    <div class="col-md-6">
-                        <input type="number" placeholder="Large Old Price" class="form-control" name="oldprice[]">
-                    </div>
-                    <div class="col-md-6">
-                        <input type="number" placeholder="Medium Old Price" class="form-control" name="oldprice[]">
-                    </div>
-                    <div class="col-md-6">
-                        <input type="number" placeholder="Small Old Price" class="form-control" name="oldprice[]">
-                    </div>
+                    @php
+                        $oldprice=json_decode($records->oldprice, TRUE);
+                    @endphp
+                    @foreach($oldprice as $single)
+                        <div class="col-md-6">
+                            <input type="number" class="form-control" name="oldprice[]" value="{{$single}}">
+                        </div>
+                    @endforeach
                 </div>
 
                 <br>
@@ -69,7 +65,12 @@
                 <div class="row">
                     <div class="col-md-6">
                         <label for="">extra</label>
-                        <input type="text" class="form-control" name="extra[]">
+                        @php
+                            $extra=json_decode($records->extra, TRUE);
+                        @endphp
+                        @foreach($extra as $single)
+                            <input type="text" class="form-control" name="extra[]" value="{{$single}}">
+                        @endforeach
                         <section id="more-extra">
                         </section>
                         <div>
@@ -92,7 +93,12 @@
                 <label for="">Description Row</label>
                 <div  class="row">
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="desc_row[]">
+                        @php
+                            $desc_row=json_decode($records->desc_row, TRUE);
+                        @endphp
+                        @foreach($desc_row as $single)
+                            <input type="text" class="form-control" name="desc_row[]" value="{{$single}}">
+                        @endforeach
                         <section id="more-desc_row">
                         </section>
                         <div>
@@ -104,9 +110,16 @@
 
                 <br>
 
+                <label for="">image</label>
                 <div  class="row">
                     <div class="col-md-6">
-                        <label for="">image</label>
+                        @if($records->image)
+                            <img src="{{asset('admin/foodimage/'.$records->image)}}" width="300">
+                        @endif
+                    </div>
+                </div>
+                <div  class="row">
+                    <div class="col-md-6">
                         <input type="file" class="form-control" name="image">
                     </div>
                 </div>
@@ -115,7 +128,7 @@
 
                 <div  class="row">
                     <div class="col-md-12">
-                        <input type="submit" class="btn btn-primary" value="kaydet">
+                        <input type="submit" class="btn btn-primary" value="güncelle">
                     </div>
                 </div>
 

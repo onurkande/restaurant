@@ -12,13 +12,18 @@ class Food extends Model
     protected $fillable = [
         'cate_id',
         'name',
-        'price',
+        'image',
+        'slug',
         'oldprice',
         'title',
-        'size',
+        'price',
         'extra',
-        'amount',
         'desc',
         'desc_row'
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class,'cate_id','id');
+    }
 }

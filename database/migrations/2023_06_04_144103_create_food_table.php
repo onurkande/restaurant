@@ -15,13 +15,14 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('cate_id');
             $table->string('name');
-            $table->integer('price');
-            $table->integer('oldprice')->nullable();
             $table->mediumText('title');
-            $table->json('size');
+            $table->string('slug');
+            $table->json('price');
+            $table->json('oldprice')->nullable();
             $table->json('extra')->nullable();
             $table->longText('desc');
             $table->json('desc_row');
+            $table->string('image');
             $table->timestamps();
         });
     }
