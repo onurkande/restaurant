@@ -22,5 +22,6 @@
             Route::post('insert-foods', [FoodController::class, 'store']);
             Route::get('edit-foods/{id}', [FoodController::class, 'edit']);
             Route::put('update-foods/{id}', [FoodController::class, 'update']);
+            Route::get('delete-foods/{id}', [FoodController::class, 'delete']);
         });
     });

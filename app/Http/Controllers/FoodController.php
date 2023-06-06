@@ -61,8 +61,9 @@ class FoodController extends Controller
 
     function edit($id)
     {
+        $category = Category::all();
         $records = Food::find($id);
-        return view('admin.edit-food',['records'=>$records]);
+        return view('admin.edit-food',['records'=>$records,'category'=>$category]);
     }
 
     function update(Request $request,$id)
@@ -106,5 +107,20 @@ class FoodController extends Controller
         $food->desc_row = $desc_row;
         $food->update();
         return redirect('dashboard/dynamic-edit/foods')->with('update',"Food güncellendi");
+    }
+
+    function delete($id)
+    {
+        $food = Food::find($id);
+        if($food->image)
+        {
+            $path = 'admin/foodimage/'.$food->image;
+            if(File::exists($path))
+            {
+                File::delete($path);
+            }
+        }
+        $food->delete();
+        return redirect('dashboard/dynamic-edit/foods')->with('delete',"Food silindi");
     }
 }

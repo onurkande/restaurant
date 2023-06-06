@@ -4,15 +4,18 @@
         <div class="card-header">
             <h4>Edit food</h4>
         </div>
-        {{-- {{dd($records)}} --}}
         <div class="card-body">
             <form action="{{url('dashboard/dynamic-edit/update-foods/'.$records->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="row">
                     <div class="col-md-12 mb-3">
-                        <select class="form-select">
-                            <option value="">{{$records->category->name}}</option>
+                        <select class="form-select" name="cate_id">
+                            @foreach ($category as $single)
+                                <option value="{{ $single->id }}" @if ($single->id == $records->category->id) selected @endif>
+                                    {{ $single->name }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -85,7 +88,7 @@
 
                 <div>
                     <label for="">Description</label><br>
-                    <textarea rows="12" cols="100" name="desc"></textarea>
+                    <textarea rows="12" cols="100" name="desc">{{$records->desc}}</textarea>
                 </div>
 
                 <br>
