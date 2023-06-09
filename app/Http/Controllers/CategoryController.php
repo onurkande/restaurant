@@ -79,4 +79,10 @@ class CategoryController extends Controller
         $category->delete();
         return redirect('dashboard/dynamic-edit/categories')->with('delete',"Category silindi");
     }
+
+    function view()
+    {
+        $records = Category::all();
+        return $records;
+    }
 }

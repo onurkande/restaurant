@@ -42,18 +42,23 @@ class FoodController extends Controller
         $extra = $request->input('extra');
         $extra=json_encode($extra,JSON_UNESCAPED_UNICODE);
 
+        $extra_price = $request->input('extra_price');
+        $extra_price=json_encode($extra_price,JSON_UNESCAPED_UNICODE);
+
         $desc_row = $request->input('desc_row');
         $desc_row=json_encode($desc_row,JSON_UNESCAPED_UNICODE);
 
         $food->name = $request->input('name');
-        $food->title = $request->input('title');
+        $food->content = $request->input('content');
         $food->slug = $request->input('slug');
         $food->desc = $request->input('desc');
         $food->cate_id = $request->input('cate_id');
+        $food->currency = $request->input('currency');
         
         $food->oldprice = $oldprice;
         $food->price = $price;
         $food->extra = $extra;
+        $food->extra_price = $extra_price;
         $food->desc_row = $desc_row;
         $food->save();
         return redirect('dashboard/dynamic-edit/foods')->with('store',"Food eklendi");
@@ -92,18 +97,23 @@ class FoodController extends Controller
         $extra = $request->input('extra');
         $extra=json_encode($extra,JSON_UNESCAPED_UNICODE);
 
+        $extra_price = $request->input('extra_price');
+        $extra_price=json_encode($extra_price,JSON_UNESCAPED_UNICODE);
+
         $desc_row = $request->input('desc_row');
         $desc_row=json_encode($desc_row,JSON_UNESCAPED_UNICODE);
 
         $food->name = $request->input('name');
-        $food->title = $request->input('title');
+        $food->content = $request->input('content');
         $food->slug = $request->input('slug');
         $food->desc = $request->input('desc');
         $food->cate_id = $request->input('cate_id');
+        $food->currency = $request->input('currency');
 
         $food->price = $price;
         $food->oldprice = $oldprice;
         $food->extra = $extra;
+        $food->extra_price = $extra_price;
         $food->desc_row = $desc_row;
         $food->update();
         return redirect('dashboard/dynamic-edit/foods')->with('update',"Food güncellendi");
@@ -122,5 +132,11 @@ class FoodController extends Controller
         }
         $food->delete();
         return redirect('dashboard/dynamic-edit/foods')->with('delete',"Food silindi");
+    }
+
+    function view()
+    {
+        $records = Food::all();
+        return $records;
     }
 }

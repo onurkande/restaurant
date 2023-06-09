@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
+use App\Http\Controllers\FrontendController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,9 +21,7 @@ require __DIR__.'/dynamic.php';
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', [FrontendController::class, 'index']);
 
 Route::get('/about', function () {
     return view('about');
@@ -43,5 +43,6 @@ Route::get('/menu', function () {
     return view('menu');
 });
 
+Route::get('/menu', [FrontendController::class, 'menu']);
 
-
+Route::get('menu_details/{id}', [FrontendController::class, 'menu_detail']);

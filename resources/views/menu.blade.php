@@ -36,33 +36,42 @@
             </form>
 
             <div class="row">
-                <div class="col-xl-3 col-sm-6 col-lg-4 wow fadeInUp" data-wow-duration="1s">
-                    <div class="tf__menu_item">
-                        <div class="tf__menu_item_img">
-                            <img src="images/menu2_img_1.jpg" alt="menu" class="img-fluid w-100">
-                        </div>
-                        <div class="tf__menu_item_text">
-                            <a class="category" href="#">Biryani</a>
-                            <a class="title" href="menu_details.html">Hyderabadi biryani</a>
-                            <p class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <i class="far fa-star"></i>
-                                <span>24</span>
-                            </p>
-                            <h5 class="price">$65.00 <del>$90.00</del></h5>
-                            <a class="tf__add_to_cart" href="#" data-bs-toggle="modal" data-bs-target="#cartModal">add
-                                to cart</a>
-                            <ul class="d-flex flex-wrap justify-content-end">
-                                <li><a href="#"><i class="fal fa-heart"></i></a></li>
-                                <li><a href="menu_details.html"><i class="far fa-eye"></i></a></li>
-                            </ul>
+                @foreach ($foods as $food)
+                    <div class="col-xl-3 col-sm-6 col-lg-4 wow fadeInUp" data-wow-duration="1s">
+                        <div class="tf__menu_item">
+                            <div class="tf__menu_item_img">
+                                <img src="{{asset('admin/foodimage/'.$food->image)}}" alt="menu" class="img-fluid w-100">
+                            </div>
+                            <div class="tf__menu_item_text">
+                                <a class="category" href="#">{{$food->category->name}}</a>
+                                <a class="title" href="{{url('/menu_details/'.$food->id)}}">{{$food->name}}</a>
+                                <p class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <i class="far fa-star"></i>
+                                    <span>24</span>
+                                </p>
+                                @php
+                                    $price=json_decode($food->price, TRUE);
+                                    $firstPrice = $price[0];
+
+                                    $oldprice=json_decode($food->oldprice, TRUE);
+                                    $firstoldPrice = $oldprice[0];
+                                @endphp
+                                <h5 class="price">{{$firstPrice}} {{$food->currency}}<del>{{$firstoldPrice}} {{$food->currency}}</del></h5>
+                                <a class="tf__add_to_cart" href="#" data-bs-toggle="modal" data-bs-target="#cartModal{{$food->id}}">add
+                                    to cart</a>
+                                <ul class="d-flex flex-wrap justify-content-end">
+                                    <li><a href="#"><i class="fal fa-heart"></i></a></li>
+                                    <li><a href="menu_details.html"><i class="far fa-eye"></i></a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 col-lg-4 wow fadeInUp" data-wow-duration="1s">
+                @endforeach
+                {{-- <div class="col-xl-3 col-sm-6 col-lg-4 wow fadeInUp" data-wow-duration="1s">
                     <div class="tf__menu_item">
                         <div class="tf__menu_item_img">
                             <img src="images/menu2_img_2.jpg" alt="menu" class="img-fluid w-100">
@@ -243,7 +252,7 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
             <div class="tf__pagination mt_50">
                 <div class="row">
@@ -268,18 +277,19 @@
     </section>
 
     <!-- CART POPUT START -->
+    @foreach ($foods as $food)
     <div class="tf__cart_popup">
-        <div class="modal fade" id="cartModal" tabindex="-1" aria-hidden="true">
+        <div class="modal fade" id="cartModal{{$food->id}}" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-body">
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
                                 class="fal fa-times"></i></button>
                         <div class="tf__cart_popup_img">
-                            <img src="images/popup_cart_img.jpg" alt="menu" class="img-fluid w-100">
+                            <img src="{{asset('admin/foodimage/'.$food->image)}}" alt="menu" class="img-fluid w-100">
                         </div>
                         <div class="tf__cart_popup_text">
-                            <a href="#" class="title">Maxican Pizza Test Better</a>
+                            <a href="#" class="title">{{$food->name}}</a>
                             <p class="rating">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -288,7 +298,16 @@
                                 <i class="far fa-star"></i>
                                 <span>(201)</span>
                             </p>
-                            <h4 class="price">$320.00 <del>$350.00</del> </h4>
+                            @php
+                                $price=json_decode($food->price, TRUE);
+                                $firstPrice = $price[0];
+                                $SecondPrice = $price[1];
+                                $ThirdPrice = $price[2];
+
+                                $oldprice=json_decode($food->oldprice, TRUE);
+                                $firstoldPrice = $oldprice[0];
+                            @endphp
+                            <h4 class="price">{{$firstPrice}} {{$food->currency}}<del>{{$firstoldPrice}} {{$food->currency}}</del> </h4>
 
                             <div class="details_size">
                                 <h5>select size</h5>
@@ -296,37 +315,38 @@
                                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="large"
                                         checked>
                                     <label class="form-check-label" for="large">
-                                        large <span>+ $350</span>
+                                        large <span>+ {{$firstPrice}} {{$food->currency}}</span>
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="medium">
                                     <label class="form-check-label" for="medium">
-                                        medium <span>+ $250</span>
+                                        medium <span>+ {{$SecondPrice}} {{$food->currency}}</span>
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="small">
                                     <label class="form-check-label" for="small">
-                                        small <span>+ $150</span>
+                                        small <span>+ {{$ThirdPrice}} {{$food->currency}}</span>
                                     </label>
                                 </div>
                             </div>
 
+                            @php
+                                $extra=json_decode($food->extra, TRUE);
+                                $extra_price=json_decode($food->extra_price, TRUE);
+                            @endphp
+
                             <div class="details_extra_item">
                                 <h5>select option <span>(optional)</span></h5>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="coca-cola">
-                                    <label class="form-check-label" for="coca-cola">
-                                        coca-cola <span>+ $10</span>
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="7up">
-                                    <label class="form-check-label" for="7up">
-                                        7up <span>+ $15</span>
-                                    </label>
-                                </div>
+                                @foreach ($extra as $key => $single)
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="{{$single}}">
+                                        <label class="form-check-label" for="{{$single}}">
+                                            {{$single}} <span>{{$extra_price[$key]}} {{$food->currency}}</span>
+                                        </label>
+                                    </div>
+                                @endforeach
                             </div>
 
                             <div class="details_quentity">
@@ -349,6 +369,7 @@
             </div>
         </div>
     </div>
+    @endforeach
     <!-- CART POPUT END -->
 
     <!--=============================

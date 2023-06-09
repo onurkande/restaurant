@@ -25,13 +25,16 @@
                         <input type="text" class="form-control" name="name">
                     </div>
                     <div class="col-md-6">
-                        <label for="">title</label>
-                        <input type="text" class="form-control" name="title">
-                    </div>
-                    <div class="col-md-6">
                         <label for="">slug</label>
                         <input type="text" class="form-control" name="slug">
                     </div>
+                </div>
+
+                <br>
+
+                <div>
+                    <label for="">Content</label><br>
+                    <textarea rows="6" cols="100" name="content"></textarea>
                 </div>
 
                 <br>
@@ -69,7 +72,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <label for="">extra</label>
-                        <input type="text" class="form-control" name="extra[]">
+                        <input type="text" class="form-control" name="extra[]" oninput="checkInputValues()" required>
                         <section id="more-extra">
                         </section>
                         <div>
@@ -77,7 +80,21 @@
                             <a onclick="removeRows()"><button type="button">-</button></a>
                         </div>  
                     </div>
-                    
+                    <div class="col-md-6">
+                        <label for="">extra price</label>
+                        <input type="number" class="form-control" name="extra_price[]" oninput="checkInputValues()" required>
+                        <section id="more-extra-price">
+                        </section>
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="">currency</label>
+                        <input type="text" class="form-control" name="currency">
+                    </div>
                 </div>
 
                 <br>
@@ -126,19 +143,47 @@
 
 @section('script')
     <script>
-        function addRows()
+        function addRows() 
         {
-            const moreRows = document.getElementById('more-extra');
+            const moreExtraRows = document.getElementById('more-extra');
+            const moreExtraPriceRows = document.getElementById('more-extra-price');
+            
             const row = document.createElement("div");
-            row.innerHTML = '<input type="text" class="form-control" name="extra[]" required>';
-            moreRows.appendChild(row);
+            row.innerHTML = '<input type="text" class="form-control" name="extra[]" oninput="checkInputValues()" required>';
+            moreExtraRows.appendChild(row);
+            
+            const priceRow = document.createElement("div");
+            priceRow.innerHTML = '<input type="number" class="form-control" name="extra_price[]" oninput="checkInputValues()" required>';
+            moreExtraPriceRows.appendChild(priceRow);
         }
 
-        function removeRows()
+        function removeRows() 
         {
-            const rowsSection = document.getElementById("more-extra");
-            const lastRows = rowsSection.querySelector("div:last-child");
-            lastRows.parentElement.removeChild(lastRows);
+            const extraRowsSection = document.getElementById("more-extra");
+            const extraPriceRowsSection = document.getElementById("more-extra-price");
+            
+            const lastExtraRow = extraRowsSection.querySelector("div:last-child");
+            lastExtraRow.parentElement.removeChild(lastExtraRow);
+            
+            const lastExtraPriceRow = extraPriceRowsSection.querySelector("div:last-child");
+            lastExtraPriceRow.parentElement.removeChild(lastExtraPriceRow);
+        }
+    </script>
+
+    <script>
+        function checkInputValues()
+        {
+            const extraInput = document.querySelector('input[name="extra[]"]');
+            const priceInput = document.querySelector('input[name="extra_price[]"]');
+            
+            if (extraInput.value !== '' && priceInput.value === '') {
+                priceInput.setCustomValidity('Please fill in the extra price');
+            } else if (extraInput.value === '' && priceInput.value !== '') {
+                extraInput.setCustomValidity('Please fill in the extra');
+            } else {
+                extraInput.setCustomValidity('');
+                priceInput.setCustomValidity('');
+            }
         }
     </script>
 

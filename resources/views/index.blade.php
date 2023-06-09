@@ -21,7 +21,6 @@
 </head>
 
 <body>
-
     <!--=============================
         TOPBAR START
     ==============================-->
@@ -434,223 +433,49 @@
                 <div class="col-xl-6 col-lg-6 wow fadeInUp" data-wow-duration="1s">
                     <div class="menu_filter d-flex flex-wrap">
                         <button class=" active" data-filter="*">all menu</button>
-                        <button data-filter=".burger">burger</button>
-                        <button data-filter=".chicken">chicken</button>
+                        @foreach ($category as $single)
+                            <button data-filter=".{{$single->slug}}">{{$single->name}}</button>
+                        @endforeach
+                        {{-- <button data-filter=".chicken">chicken</button>
                         <button data-filter=".pizza">pizza</button>
-                        <button data-filter=".dresserts">dresserts</button>
+                        <button data-filter=".dresserts">dresserts</button> --}}
                     </div>
                 </div>
             </div>
 
             <div class="row grid">
-                <div class="col-xxl-3 col-sm-6 col-lg-4 chicken wow fadeInUp" data-wow-duration="1s">
-                    <div class="tf__menu_item">
-                        <div class="tf__menu_item_img">
-                            <img src="images/menu2_img_1.jpg" alt="menu" class="img-fluid w-100">
-                        </div>
-                        <div class="tf__menu_item_text">
-                            <a class="category" href="#">Biryani</a>
-                            <a class="title" href="menu_details.html">Hyderabadi biryani</a>
-                            <p class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <i class="far fa-star"></i>
-                                <span>24</span>
-                            </p>
-                            <h5 class="price">$65.00 <del>$90.00</del></h5>
-                            <a class="tf__add_to_cart" href="#" data-bs-toggle="modal" data-bs-target="#cartModal">add
-                                to cart</a>
-                            <ul class="d-flex flex-wrap justify-content-end">
-                                <li><a href="#"><i class="fal fa-heart"></i></a></li>
-                                <li><a href="menu_details.html"><i class="far fa-eye"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xxl-3 col-sm-6 col-lg-4 burger dresserts wow fadeInUp" data-wow-duration="1s">
-                    <div class="tf__menu_item">
-                        <div class="tf__menu_item_img">
-                            <img src="images/menu2_img_2.jpg" alt="menu" class="img-fluid w-100">
-                        </div>
-                        <div class="tf__menu_item_text">
-                            <a class="category" href="#">Chicken</a>
-                            <a class="title" href="menu_details.html">Daria Shevtsova</a>
-                            <p class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <span>30</span>
-                            </p>
-                            <h5 class="price">$80.00</h5>
-                            <a class="tf__add_to_cart" href="#" data-bs-toggle="modal" data-bs-target="#cartModal">add
-                                to cart</a>
-                            <ul class="d-flex flex-wrap justify-content-end">
-                                <li><a href="#"><i class="fal fa-heart"></i></a></li>
-                                <li><a href="menu_details.html"><i class="far fa-eye"></i></a></li>
-                            </ul>
+                @foreach ($foods as $food)
+                    <div class="col-xxl-3 col-sm-6 col-lg-4 {{ $food->category->slug }} wow fadeInUp" data-wow-duration="1s">
+                        <div class="tf__menu_item">
+                            <div class="tf__menu_item_img">
+                                <img src="{{asset('admin/foodimage/'.$food->image)}}" alt="menu" class="img-fluid w-100">
+                            </div>
+                            <div class="tf__menu_item_text">
+                                <a class="category" href="#">{{$food->category->name}}</a>
+                                <a class="title" href="{{url('/menu_details/'.$food->id)}}">{{$food->name}}</a>
+                                <p class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <i class="far fa-star"></i>
+                                    <span>24</span>
+                                </p>
+                                @php
+                                    $price=json_decode($food->price, TRUE);
+                                    $firstPrice = $price[0];
+                                @endphp
+                                <h5 class="price">{{$firstPrice}}<del>$90.00</del></h5>
+                                <a class="tf__add_to_cart" href="#" data-bs-toggle="modal" data-bs-target="#cartModal">add
+                                    to cart</a>
+                                <ul class="d-flex flex-wrap justify-content-end">
+                                    <li><a href="#"><i class="fal fa-heart"></i></a></li>
+                                    <li><a href="menu_details.html"><i class="far fa-eye"></i></a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xxl-3 col-sm-6 col-lg-4 chicken wow fadeInUp" data-wow-duration="1s">
-                    <div class="tf__menu_item">
-                        <div class="tf__menu_item_img">
-                            <img src="images/menu2_img_3.jpg" alt="menu" class="img-fluid w-100">
-                        </div>
-                        <div class="tf__menu_item_text">
-                            <a class="category" href="#">burger</a>
-                            <a class="title" href="menu_details.html">Spicy Burger</a>
-                            <p class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span>17</span>
-                            </p>
-                            <h5 class="price">$100.00 <del>$110.00</del></h5>
-                            <a class="tf__add_to_cart" href="#" data-bs-toggle="modal" data-bs-target="#cartModal">add
-                                to cart</a>
-                            <ul class="d-flex flex-wrap justify-content-end">
-                                <li><a href="#"><i class="fal fa-heart"></i></a></li>
-                                <li><a href="menu_details.html"><i class="far fa-eye"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xxl-3 col-sm-6 col-lg-4 burger pizza wow fadeInUp" data-wow-duration="1s">
-                    <div class="tf__menu_item">
-                        <div class="tf__menu_item_img">
-                            <img src="images/menu2_img_4.jpg" alt="menu" class="img-fluid w-100">
-                        </div>
-                        <div class="tf__menu_item_text">
-                            <a class="category" href="#">dressert</a>
-                            <a class="title" href="menu_details.html">Fried Chicken</a>
-                            <p class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <span>22</span>
-                            </p>
-                            <h5 class="price">$99.00</h5>
-                            <a class="tf__add_to_cart" href="#" data-bs-toggle="modal" data-bs-target="#cartModal">add
-                                to cart</a>
-                            <ul class="d-flex flex-wrap justify-content-end">
-                                <li><a href="#"><i class="fal fa-heart"></i></a></li>
-                                <li><a href="menu_details.html"><i class="far fa-eye"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xxl-3 col-sm-6 col-lg-4 chicken dresserts wow fadeInUp" data-wow-duration="1s">
-                    <div class="tf__menu_item">
-                        <div class="tf__menu_item_img">
-                            <img src="images/menu2_img_5.jpg" alt="menu" class="img-fluid w-100">
-                        </div>
-                        <div class="tf__menu_item_text">
-                            <a class="category" href="#">kabab</a>
-                            <a class="title" href="menu_details.html">Mozzarella Sticks</a>
-                            <p class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span>72</span>
-                            </p>
-                            <h5 class="price">$75.00</h5>
-                            <a class="tf__add_to_cart" href="#" data-bs-toggle="modal" data-bs-target="#cartModal">add
-                                to cart</a>
-                            <ul class="d-flex flex-wrap justify-content-end">
-                                <li><a href="#"><i class="fal fa-heart"></i></a></li>
-                                <<li><a href="menu_details.html"><i class="far fa-eye"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xxl-3 col-sm-6 col-lg-4 burger pizza wow fadeInUp" data-wow-duration="1s">
-                    <div class="tf__menu_item">
-                        <div class="tf__menu_item_img">
-                            <img src="images/menu2_img_6.jpg" alt="menu" class="img-fluid w-100">
-                        </div>
-                        <div class="tf__menu_item_text">
-                            <a class="category" href="#">kacchi</a>
-                            <a class="title" href="menu_details.html">Popcorn Chicken</a>
-                            <p class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <i class="far fa-star"></i>
-                                <span>57</span>
-                            </p>
-                            <h5 class="price">$69.00 <del>$80.00</del></h5>
-                            <a class="tf__add_to_cart" href="#" data-bs-toggle="modal" data-bs-target="#cartModal">add
-                                to cart</a>
-                            <ul class="d-flex flex-wrap justify-content-end">
-                                <li><a href="#"><i class="fal fa-heart"></i></a></li>
-                                <li><a href="menu_details.html"><i class="far fa-eye"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xxl-3 col-sm-6 col-lg-4 chicken dresserts wow fadeInUp" data-wow-duration="1s">
-                    <div class="tf__menu_item">
-                        <div class="tf__menu_item_img">
-                            <img src="images/menu2_img_7.jpg" alt="menu" class="img-fluid w-100">
-                        </div>
-                        <div class="tf__menu_item_text">
-                            <a class="category" href="#">noodles</a>
-                            <a class="title" href="menu_details.html">Chicken Wings</a>
-                            <p class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <span>43</span>
-                            </p>
-                            <h5 class="price">$79.00 <del>$90.00</del></h5>
-                            <a class="tf__add_to_cart" href="#" data-bs-toggle="modal" data-bs-target="#cartModal">add
-                                to cart</a>
-                            <ul class="d-flex flex-wrap justify-content-end">
-                                <li><a href="#"><i class="fal fa-heart"></i></a></li>
-                                <li><a href="menu_details.html"><i class="far fa-eye"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xxl-3 col-sm-6 col-lg-4 burger pizza wow fadeInUp" data-wow-duration="1s">
-                    <div class="tf__menu_item">
-                        <div class="tf__menu_item_img">
-                            <img src="images/menu2_img_8.jpg" alt="menu" class="img-fluid w-100">
-                        </div>
-                        <div class="tf__menu_item_text">
-                            <a class="category" href="#">grill</a>
-                            <a class="title" href="menu_details.html">Onion Rings</a>
-                            <p class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <span>62</span>
-                            </p>
-                            <h5 class="price">$110.00</h5>
-                            <a class="tf__add_to_cart" href="#" data-bs-toggle="modal" data-bs-target="#cartModal">add
-                                to cart</a>
-                            <ul class="d-flex flex-wrap justify-content-end">
-                                <li><a href="#"><i class="fal fa-heart"></i></a></li>
-                                <li><a href="menu_details.html"><i class="far fa-eye"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -1186,6 +1011,35 @@
 
     <!--main/custom js-->
     <script src="{{asset('assets/js/main.js')}}"></script>
+
+    <script>
+        // Butonlara tıklama olayını dinle
+        const buttons = document.querySelectorAll('.menu_filter button');
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Tüm yiyecekleri gizle
+                const foodItems = document.querySelectorAll('.food-item');
+                foodItems.forEach(foodItem => {
+                    foodItem.style.display = 'none';
+                });
+
+                // Seçilen kategoriye ait yiyecekleri göster
+                const filterValue = button.getAttribute('data-filter');
+                if (filterValue === '*') {
+                    // Tüm yiyecekleri göster
+                    foodItems.forEach(foodItem => {
+                        foodItem.style.display = 'block';
+                    });
+                } else {
+                    // Seçilen kategoriye ait yiyecekleri göster
+                    const filteredFoodItems = document.querySelectorAll('.food-item' + filterValue);
+                    filteredFoodItems.forEach(foodItem => {
+                        foodItem.style.display = 'block';
+                    });
+                }
+            });
+        });
+</script>
 
 </body>
 
