@@ -22,6 +22,7 @@ class FrontendController extends Controller
 
     function menu()
     {
+        // $foods = Food::paginate(1);
         $foods = app('App\Http\Controllers\FoodController')->view();
         return view('menu',['foods'=>$foods]);
     }

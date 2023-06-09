@@ -71,205 +71,63 @@
                         </div>
                     </div>
                 @endforeach
-                {{-- <div class="col-xl-3 col-sm-6 col-lg-4 wow fadeInUp" data-wow-duration="1s">
-                    <div class="tf__menu_item">
-                        <div class="tf__menu_item_img">
-                            <img src="images/menu2_img_2.jpg" alt="menu" class="img-fluid w-100">
-                        </div>
-                        <div class="tf__menu_item_text">
-                            <a class="category" href="#">Chicken</a>
-                            <a class="title" href="menu_details.html">Daria Shevtsova</a>
-                            <p class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <span>30</span>
-                            </p>
-                            <h5 class="price">$80.00</h5>
-                            <a class="tf__add_to_cart" href="#" data-bs-toggle="modal" data-bs-target="#cartModal">add
-                                to cart</a>
-                            <ul class="d-flex flex-wrap justify-content-end">
-                                <li><a href="#"><i class="fal fa-heart"></i></a></li>
-                                <li><a href="menu_details.html"><i class="far fa-eye"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 col-lg-4 wow fadeInUp" data-wow-duration="1s">
-                    <div class="tf__menu_item">
-                        <div class="tf__menu_item_img">
-                            <img src="images/menu2_img_3.jpg" alt="menu" class="img-fluid w-100">
-                        </div>
-                        <div class="tf__menu_item_text">
-                            <a class="category" href="#">burger</a>
-                            <a class="title" href="menu_details.html">Spicy Burger</a>
-                            <p class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span>17</span>
-                            </p>
-                            <h5 class="price">$100.00 <del>$110.00</del></h5>
-                            <a class="tf__add_to_cart" href="#" data-bs-toggle="modal" data-bs-target="#cartModal">add
-                                to cart</a>
-                            <ul class="d-flex flex-wrap justify-content-end">
-                                <li><a href="#"><i class="fal fa-heart"></i></a></li>
-                                <li><a href="menu_details.html"><i class="far fa-eye"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 col-lg-4 wow fadeInUp" data-wow-duration="1s">
-                    <div class="tf__menu_item">
-                        <div class="tf__menu_item_img">
-                            <img src="images/menu2_img_4.jpg" alt="menu" class="img-fluid w-100">
-                        </div>
-                        <div class="tf__menu_item_text">
-                            <a class="category" href="#">dressert</a>
-                            <a class="title" href="menu_details.html">Fried Chicken</a>
-                            <p class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <span>22</span>
-                            </p>
-                            <h5 class="price">$99.00</h5>
-                            <a class="tf__add_to_cart" href="#" data-bs-toggle="modal" data-bs-target="#cartModal">add
-                                to cart</a>
-                            <ul class="d-flex flex-wrap justify-content-end">
-                                <li><a href="#"><i class="fal fa-heart"></i></a></li>
-                                <li><a href="menu_details.html"><i class="far fa-eye"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 col-lg-4 wow fadeInUp" data-wow-duration="1s">
-                    <div class="tf__menu_item">
-                        <div class="tf__menu_item_img">
-                            <img src="images/menu2_img_5.jpg" alt="menu" class="img-fluid w-100">
-                        </div>
-                        <div class="tf__menu_item_text">
-                            <a class="category" href="#">kabab</a>
-                            <a class="title" href="menu_details.html">Mozzarella Sticks</a>
-                            <p class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span>72</span>
-                            </p>
-                            <h5 class="price">$75.00</h5>
-                            <a class="tf__add_to_cart" href="#" data-bs-toggle="modal" data-bs-target="#cartModal">add
-                                to cart</a>
-                            <ul class="d-flex flex-wrap justify-content-end">
-                                <li><a href="#"><i class="fal fa-heart"></i></a></li>
-                                <li><a href="menu_details.html"><i class="far fa-eye"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 col-lg-4 wow fadeInUp" data-wow-duration="1s">
-                    <div class="tf__menu_item">
-                        <div class="tf__menu_item_img">
-                            <img src="images/menu2_img_6.jpg" alt="menu" class="img-fluid w-100">
-                        </div>
-                        <div class="tf__menu_item_text">
-                            <a class="category" href="#">kacchi</a>
-                            <a class="title" href="menu_details.html">Popcorn Chicken</a>
-                            <p class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <i class="far fa-star"></i>
-                                <span>57</span>
-                            </p>
-                            <h5 class="price">$69.00 <del>$80.00</del></h5>
-                            <a class="tf__add_to_cart" href="#" data-bs-toggle="modal" data-bs-target="#cartModal">add
-                                to cart</a>
-                            <ul class="d-flex flex-wrap justify-content-end">
-                                <li><a href="#"><i class="fal fa-heart"></i></a></li>
-                                <li><a href="menu_details.html"><i class="far fa-eye"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 col-lg-4 wow fadeInUp" data-wow-duration="1s">
-                    <div class="tf__menu_item">
-                        <div class="tf__menu_item_img">
-                            <img src="images/menu2_img_7.jpg" alt="menu" class="img-fluid w-100">
-                        </div>
-                        <div class="tf__menu_item_text">
-                            <a class="category" href="#">noodles</a>
-                            <a class="title" href="menu_details.html">Chicken Wings</a>
-                            <p class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <span>43</span>
-                            </p>
-                            <h5 class="price">$79.00 <del>$90.00</del></h5>
-                            <a class="tf__add_to_cart" href="#" data-bs-toggle="modal" data-bs-target="#cartModal">add
-                                to cart</a>
-                            <ul class="d-flex flex-wrap justify-content-end">
-                                <li><a href="#"><i class="fal fa-heart"></i></a></li>
-                                <li><a href="menu_details.html"><i class="far fa-eye"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 col-lg-4 wow fadeInUp" data-wow-duration="1s">
-                    <div class="tf__menu_item">
-                        <div class="tf__menu_item_img">
-                            <img src="images/menu2_img_8.jpg" alt="menu" class="img-fluid w-100">
-                        </div>
-                        <div class="tf__menu_item_text">
-                            <a class="category" href="#">grill</a>
-                            <a class="title" href="menu_details.html">Onion Rings</a>
-                            <p class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <span>62</span>
-                            </p>
-                            <h5 class="price">$110.00</h5>
-                            <a class="tf__add_to_cart" href="#" data-bs-toggle="modal" data-bs-target="#cartModal">add
-                                to cart</a>
-                            <ul class="d-flex flex-wrap justify-content-end">
-                                <li><a href="#"><i class="fal fa-heart"></i></a></li>
-                                <li><a href="menu_details.html"><i class="far fa-eye"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div> --}}
             </div>
+
+            @php
+                $itemsPerPage = 1; // Her sayfada gösterilecek öğe sayısı
+                $currentPage = request()->input('page', 1); // Sayfa numarasını alın, varsayılan olarak 1
+
+                $foodsArray = $foods->toArray();
+                //$foods = gettype($foodsArray);
+                //dd($foodsArray);
+
+                $totalItems = count($foodsArray); // Tüm yiyeceklerin sayısını alın
+                $offset = ($currentPage - 1) * $itemsPerPage; // Offset değerini hesaplayın
+
+                // Sayfada gösterilecek yiyecekleri alın
+                $paginatedFoods = array_slice($foodsArray, $offset, $itemsPerPage);
+
+                // Toplam sayfa sayısını hesaplayın
+                $totalPages = ceil($totalItems / $itemsPerPage);
+            @endphp
+
             <div class="tf__pagination mt_50">
                 <div class="row">
                     <div class="col-12">
                         <nav aria-label="...">
                             <ul class="pagination">
+                                @if ($currentPage > 1)
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ $currentPage - 1 }}"><i class="fas fa-long-arrow-alt-left"></i></a>
+                                    </li>
+                                @endif
+
+                                @for ($page = 1; $page <= $totalPages; $page++)
+                                    <li class="page-item {{ $page == $currentPage ? 'active' : '' }}">
+                                        <a class="page-link" href="?page={{ $page }}">{{ $page }}</a>
+                                    </li>
+                                @endfor
+
+                                @if ($currentPage < $totalPages)
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ $currentPage + 1 }}"><i class="fas fa-long-arrow-alt-right"></i></a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </nav>
+                        {{-- <nav aria-label="...">
+                            <ul class="pagination">
                                 <li class="page-item">
                                     <a class="page-link" href="#"><i class="fas fa-long-arrow-alt-left"></i></a>
                                 </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
                                 <li class="page-item"><a class="page-link" href="#">3</a></li>
                                 <li class="page-item">
                                     <a class="page-link" href="#"><i class="fas fa-long-arrow-alt-right"></i></a>
                                 </li>
                             </ul>
-                        </nav>
+                        </nav> --}}
                     </div>
                 </div>
             </div>

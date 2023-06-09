@@ -58,13 +58,13 @@
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="medium">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="medium" >
                                 <label class="form-check-label" for="medium">
                                     medium <span>+ {{$SecondPrice}} {{$records->currency}}</span>
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="small">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="small" >
                                 <label class="form-check-label" for="small">
                                     small <span>+ {{$ThirdPrice}} {{$records->currency}}</span>
                                 </label>
@@ -80,7 +80,7 @@
                             <h5>select option <span>(optional)</span></h5>
                             @foreach ($extra as $key => $single)
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="{{$single}}">
+                                    <input class="form-check-input" type="checkbox" id="{{$single}}">
                                     <label class="form-check-label" for="{{$single}}">
                                         {{$single}}<span>{{$extra_price[$key]}} {{$records->currency}}</span>
                                     </label>
@@ -109,16 +109,16 @@
                             <h5>select quentity</h5>
                             <div class="quentity_btn_area d-flex flex-wrapa align-items-center">
                                 <div class="quentity_btn">
-                                    <button class="btn btn-danger"><i class="fal fa-minus"></i></button>
-                                    <input type="text" placeholder="1">
-                                    <button class="btn btn-success"><i class="fal fa-plus"></i></button>
+                                    <button class="btn btn-danger decrease-quantity"><i class="fal fa-minus"></i></button>
+                                    <input type="text" id="quantity" placeholder="1" value="1">
+                                    <button class="btn btn-success increase-quantity"><i class="fal fa-plus"></i></button>
                                 </div>
-                                <h3>{{$totalPrice}} {{$records->currency}}</h3>
+                                <h3 id="total-price">687</h3>
                             </div>
                         </div>
                         <ul class="details_button_area d-flex flex-wrap">
-                            <li><a class="common_btn" href="#">add to cart</a></li>
-                            <li><a class="common_btn" href="#">wishlist</a></li>
+                            <li><a class="common_btn add-to-cart-btn" href="#">add to cart</a></li>
+                            <li><a class="common_btn wishlist-btn" href="#">wishlist</a></li>
                         </ul>
                     </div>
                 </div>
@@ -140,55 +140,15 @@
                             <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                                 aria-labelledby="pills-home-tab" tabindex="0">
                                 <div class="menu_det_description">
-                                    <p>Ipsum dolor, sit amet consectetur adipisicing elit. Doloribus consectetur
-                                        ullam in? Beatae, dolorum ad ea deleniti ratione voluptatum similique omnis
-                                        voluptas tempora optio soluta vero veritatis reiciendis blanditiis architecto.
-                                        Debitis nesciunt inventore voluptate tempora ea incidunt iste, corporis, quo
-                                        cumque facere doloribus possimus nostrum sed magni quasi, assumenda autem!
-                                        Repudiandae nihil magnam provident illo alias vero odit repellendus, ipsa nemo
-                                        itaque. Aperiam fuga, magnam quia illum minima blanditiis tempore. vero
-                                        veritatis reiciendis blanditiis architecto. Debitis nesciunt inventore voluptate
-                                        tempora ea incidunt iste, corporis, quo cumque facere doloribus possimus nostrum
-                                        sed magni quasi</p>
+                                    <p>{{$records->desc}}</p>
                                     <ul>
-                                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit Doloribus.</li>
-                                        <li>Dolor sit amet consectetur adipisicing elit. Earum itaque nesciunt.</li>
-                                        <li>Corporis quo cumque facere doloribus possimus nostrum sed magni quasi.</li>
-                                        <li>Incidunt iste corporis quo cumque facere doloribus possimus nostrum sed.
-                                        </li>
-                                        <li>Incidunt iste corporis quo cumque facere doloribus possimus nostrum sed.
-                                        </li>
-                                        <li>Architecto Debitis nesciunt inventore voluptate tempora ea.</li>
-                                        <li>Earum itaque nesciunt dolor laudantium placeat sed velit aspernatur.</li>
-                                        <li>Laudantium placeat sed velit aspernatur nobis quos quibusdam distinctio.
-                                        </li>
+                                        @php
+                                            $desc_row=json_decode($records->desc_row, TRUE);
+                                        @endphp
+                                        @foreach($desc_row as $single)
+                                            <li>{{$single}}</li>
+                                        @endforeach
                                     </ul>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum itaque nesciunt
-                                        dolor laudantium placeat sed velit aspernatur, nobis quos quibusdam distinctio
-                                        voluptatum officia vel sapiente enim, reprehenderit impedit beatae molestias
-                                        dolorum. A laborum consectetur sed quis exercitationem optio consequatur, unde
-                                        neque est odit, pariatur quae incidunt quasi dolorem nihil aliquid ut veritatis
-                                        porro eaque cupiditate voluptatem vel ad! Asperiores, praesentium. sit amet
-                                        consectetur adipisicing elit. Doloribus consectetur ullam in? Beatae, dolorum ad
-                                        ea deleniti ratione voluptatum similique omnis voluptas tempora optio soluta</p>
-
-                                    <ul>
-                                        <li>Reiciendis blanditiis architecto. Debitis nesciunt inventore voluptate
-                                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit Doloribus.</li>
-                                        <li>Dolor sit amet consectetur adipisicing elit. Earum itaque nesciunt.</li>
-                                        <li>Corporis quo cumque facere doloribus possimus nostrum sed magni quasi.</li>
-                                        <li>Incidunt iste corporis quo cumque facere doloribus possimus nostrum sed.
-                                        </li>
-                                        <li>Incidunt iste corporis quo cumque facere doloribus possimus nostrum sed.
-                                        </li>
-                                    </ul>
-                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus consectetur
-                                        ullam in? Beatae, dolorum ad ea deleniti ratione voluptatum similique omnis
-                                        voluptas tempora optio soluta vero veritatis reiciendis blanditiis architecto.
-                                        Debitis nesciunt inventore voluptate tempora ea incidunt iste, corporis, quo
-                                        cumque facere doloribus possimus nostrum sed magni quasi, assumenda autem!
-                                        Repudiandae nihil magnam provident illo alias vero odit repellendus, ipsa nemo
-                                        itaque. Aperiam fuga, magnam quia illum minima blanditiis tempore.</p>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="pills-contact" role="tabpanel"
@@ -562,4 +522,37 @@
     <!--=============================
         MENU DETAILS END
     ==============================-->
+@endsection
+
+@section('script')
+    <script>
+        // Miktarı azaltma
+        document.querySelector('.decrease-quantity').addEventListener('click', function() {
+            var quantityInput = document.getElementById('quantity');
+            var quantity = parseInt(quantityInput.value);
+            
+            if (quantity > 1) {
+                quantity--;
+                quantityInput.value = quantity;
+                calculateTotalPrice(quantity);
+            }
+        });
+
+        // Miktarı artırma
+        document.querySelector('.increase-quantity').addEventListener('click', function() {
+            var quantityInput = document.getElementById('quantity');
+            var quantity = parseInt(quantityInput.value);
+            
+            quantity++;
+            quantityInput.value = quantity;
+            calculateTotalPrice(quantity);
+        });
+
+        // Toplam fiyatı hesaplama
+        function calculateTotalPrice(quantity) {
+            var price = 320.00; // Yemek fiyatı
+            var totalPrice = price * quantity;
+            document.getElementById('total-price').innerHTML = '$' + totalPrice.toFixed(2);
+        }
+    </script>
 @endsection
