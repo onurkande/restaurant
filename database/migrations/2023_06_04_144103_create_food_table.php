@@ -21,6 +21,7 @@ return new class extends Migration
             $table->json('oldprice')->nullable();
             $table->json('extra')->nullable();
             $table->json('extra_price')->nullable();
+            $table->bigInteger('qty');
             $table->string('currency');
             $table->longText('desc');
             $table->json('desc_row');

@@ -101,6 +101,15 @@
 
                 <div class="row">
                     <div class="col-md-6">
+                        <label for="">Qty</label>
+                        <input type="number" class="form-control" name="qty" value="{{$records->qty}}">
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="row">
+                    <div class="col-md-6">
                         <label for="">currency</label>
                         <input type="text" class="form-control" name="currency" value="{{$records->currency}}">
                     </div>

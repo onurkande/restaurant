@@ -54,6 +54,7 @@ class FoodController extends Controller
         $food->desc = $request->input('desc');
         $food->cate_id = $request->input('cate_id');
         $food->currency = $request->input('currency');
+        $food->qty = $request->input('qty');
         
         $food->oldprice = $oldprice;
         $food->price = $price;
@@ -109,6 +110,7 @@ class FoodController extends Controller
         $food->desc = $request->input('desc');
         $food->cate_id = $request->input('cate_id');
         $food->currency = $request->input('currency');
+        $food->qty = $request->input('qty');
 
         $food->price = $price;
         $food->oldprice = $oldprice;

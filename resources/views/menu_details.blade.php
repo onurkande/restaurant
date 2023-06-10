@@ -6,7 +6,7 @@
     ==============================-->
     <section class="tf__menu_details mt_100 xs_mt_75 mb_95 xs_mb_65">
         <div class="container">
-            <div class="row">
+            <div class="row food_data">
                 <div class="col-lg-5 col-sm-10 col-md-9 wow fadeInUp" data-wow-duration="1s">
                     <div class="exzoom hidden" id="exzoom">
                         <div class="exzoom_img_box tf__menu_details_images">
@@ -106,6 +106,7 @@
                         @endphp
 
                         <div class="details_quentity">
+                            <input type="hidden" value="{{$records->id}}" class="food_id">
                             <h5>select quentity</h5>
                             <div class="quentity_btn_area d-flex flex-wrapa align-items-center">
                                 <div class="quentity_btn">
@@ -436,7 +437,7 @@
     </section>
 
     <!-- CART POPUT START -->
-    <div class="tf__cart_popup">
+    {{-- <div class="tf__cart_popup">
         <div class="modal fade" id="cartModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -516,7 +517,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- CART POPUT END -->
 
     <!--=============================
@@ -554,5 +555,19 @@
             var totalPrice = price * quantity;
             document.getElementById('total-price').innerHTML = '$' + totalPrice.toFixed(2);
         }
+    </script>
+
+    <script>
+        $(document).ready(function() {
+           $('.add-to-cart-btn').click(function (e){
+                e.preventDefault();
+
+                var food_id = $(this).closest('.food_data').find('.food_id').val();
+                var food_qty = $(this).closest('.food_data').find('#quantity').val();
+
+                alert(food_id);
+                alert(food_qty);
+           }) 
+        });
     </script>
 @endsection

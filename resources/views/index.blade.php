@@ -459,7 +459,7 @@
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star-half-alt"></i>
                                     <i class="far fa-star"></i>
-                                    <span>24</span>
+                                    <span>{{$food->qty}}</span>
                                 </p>
                                 @php
                                     $price=json_decode($food->price, TRUE);
