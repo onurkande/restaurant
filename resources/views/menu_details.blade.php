@@ -29,7 +29,17 @@
                         <h2>{{$records->name}}</h2>
                         @php
                             $price=json_decode($records->price, TRUE);
+                            $extra_price=json_decode($records->extra_price, TRUE);
                             $firstPrice = $price[0];
+                            $SecondPrice = $price[1];
+                            $ThirdPrice = $price[2];
+
+
+                            $firstPrice = intval($firstPrice);
+                            $SecondPrice = intval($SecondPrice);
+                            $ThirdPrice = intval($ThirdPrice);
+
+                            $extra_price = array_map('intval', $extra_price);
 
                             $oldprice=json_decode($records->oldprice, TRUE);
                             $firstOldPrice = $oldprice[0];
@@ -44,27 +54,22 @@
                             <span>(201)</span>
                         </p>
                         <p class="short_description">{{$records->content}}</p>
-
-                        @php
-                            $SecondPrice = $price[1];
-                            $ThirdPrice = $price[2];
-                        @endphp
                         <div class="details_size">
                             <h5>select size</h5>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="large" checked>
+                                <input class="form-check-input" type="radio" name="size" id="large" value="{{$firstPrice}}" checked>
                                 <label class="form-check-label" for="large">
                                     large <span>+ {{$firstPrice}} {{$records->currency}}</span>
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="medium" >
+                                <input class="form-check-input" type="radio" name="size" id="medium" value="{{$SecondPrice}}" >
                                 <label class="form-check-label" for="medium">
                                     medium <span>+ {{$SecondPrice}} {{$records->currency}}</span>
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="small" >
+                                <input class="form-check-input" type="radio" name="size" id="small" value="{{$ThirdPrice}}">
                                 <label class="form-check-label" for="small">
                                     small <span>+ {{$ThirdPrice}} {{$records->currency}}</span>
                                 </label>
@@ -73,37 +78,19 @@
 
                         @php
                             $extra=json_decode($records->extra, TRUE);
-                            $extra_price=json_decode($records->extra_price, TRUE);
                         @endphp
 
                         <div class="details_extra_item">
                             <h5>select option <span>(optional)</span></h5>
                             @foreach ($extra as $key => $single)
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="{{$single}}">
+                                    <input class="form-check-input extra-checkbox" type="checkbox" id="{{$single}}" value="{{$extra_price[$key]}}">
                                     <label class="form-check-label" for="{{$single}}">
                                         {{$single}}<span>{{$extra_price[$key]}} {{$records->currency}}</span>
                                     </label>
                                 </div>
                             @endforeach
                         </div>
-
-                        {{-- TOPLAM ÜCRETİ HESAPLAMA --}}
-                        @php
-                            $firstPrice = intval($firstPrice);
-                            $SecondPrice = intval($SecondPrice);
-                            $ThirdPrice = intval($ThirdPrice);
-                            
-                            $total = $firstPrice + $SecondPrice + $SecondPrice; 
-
-                            $total2 = 0;
-                            foreach ($extra_price as $value) 
-                            {
-                                $total2 += intval($value);
-                            }
-
-                            $totalPrice = $total + $total2;
-                        @endphp
 
                         <div class="details_quentity">
                             <input type="hidden" value="{{$records->id}}" class="food_id">
@@ -114,7 +101,7 @@
                                     <input type="text" id="quantity" placeholder="1" value="1">
                                     <button class="btn btn-success increase-quantity"><i class="fal fa-plus"></i></button>
                                 </div>
-                                <h3 id="total-price">687</h3>
+                                <h3 id="total-price"></h3>
                             </div>
                         </div>
                         <ul class="details_button_area d-flex flex-wrap">
@@ -527,6 +514,86 @@
 
 @section('script')
     <script>
+        $(document).ready(function() {
+           $('.add-to-cart-btn').click(function (e){
+                e.preventDefault();
+
+                var food_id = $(this).closest('.food_data').find('.food_id').val();
+                var food_qty = $(this).closest('.food_data').find('#quantity').val();
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    method: "POST",
+                    url: "/add-to-cart",
+                    data: {
+                        'food_id': food_id,
+                        'food_qty': food_qty
+                    },
+                    success: function (response) {
+                        alert(response.status);
+                    }
+                });
+           }) 
+        });
+    </script>
+
+    <script>
+        // Fiyatları ve döviz birimini PHP'den alabilirsiniz
+        var firstPrice = parseFloat("{{$firstPrice}}");
+        var secondPrice = parseFloat("{{$SecondPrice}}");
+        var thirdPrice = parseFloat("{{$ThirdPrice}}");
+        var currency = "{{$records->currency}}";
+
+        // Radio inputlarının değişimini dinleyen fonksiyon
+        function handleSizeChange() {
+            var totalPrice = 0;
+
+            // Seçili boyuta göre fiyatı güncelle
+            if (document.getElementById("large").checked) {
+                totalPrice += firstPrice;
+            } else if (document.getElementById("medium").checked) {
+                totalPrice += secondPrice;
+            } else if (document.getElementById("small").checked) {
+                totalPrice += thirdPrice;
+            }
+
+            // Checkbox inputlarını kontrol et
+            var checkboxes = document.querySelectorAll(".form-check-input[type='checkbox']");
+            checkboxes.forEach(function (checkbox) {
+                if (checkbox.checked) {
+                    var price = parseFloat(checkbox.dataset.price);
+                    totalPrice += price;
+                }
+            });
+
+            // Toplam fiyatı h3 elementine yazdır
+            document.getElementById("total-price").textContent = totalPrice.toFixed(2) + " " + currency;
+        }
+
+        // Radio inputlarının değişimini dinlemek için event listener ekle
+        var radioInputs = document.querySelectorAll(".form-check-input[type='radio']");
+        radioInputs.forEach(function (radioInput) {
+            radioInput.addEventListener("change", handleSizeChange);
+        });
+
+        // Checkbox inputlarının değişimini dinlemek için event listener ekle
+        var checkboxes = document.querySelectorAll(".form-check-input[type='checkbox']");
+        checkboxes.forEach(function (checkbox) {
+            checkbox.addEventListener("change", handleSizeChange);
+        });
+
+        // Sayfa yüklendiğinde başlangıç fiyatını ve h3 elementini güncelle
+        document.addEventListener("DOMContentLoaded", function () {
+            handleSizeChange();
+        });
+    </script>
+
+    <script>
         // Miktarı azaltma
         document.querySelector('.decrease-quantity').addEventListener('click', function() {
             var quantityInput = document.getElementById('quantity');
@@ -548,26 +615,13 @@
             quantityInput.value = quantity;
             calculateTotalPrice(quantity);
         });
-
+        
         // Toplam fiyatı hesaplama
         function calculateTotalPrice(quantity) {
-            var price = 320.00; // Yemek fiyatı
+            var price = 320; // Yemek fiyatı
             var totalPrice = price * quantity;
             document.getElementById('total-price').innerHTML = '$' + totalPrice.toFixed(2);
         }
     </script>
 
-    <script>
-        $(document).ready(function() {
-           $('.add-to-cart-btn').click(function (e){
-                e.preventDefault();
-
-                var food_id = $(this).closest('.food_data').find('.food_id').val();
-                var food_qty = $(this).closest('.food_data').find('#quantity').val();
-
-                alert(food_id);
-                alert(food_qty);
-           }) 
-        });
-    </script>
 @endsection

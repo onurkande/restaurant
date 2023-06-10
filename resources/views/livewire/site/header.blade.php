@@ -83,7 +83,7 @@
                 </ul>
                 <ul class="menu_icon d-flex flex-wrap">
                     <li>
-                        <a class="cart_icon" href="cart_view.html"><i class="fas fa-shopping-basket"></i>
+                        <a class="cart_icon" href="{{url('cart')}}"><i class="fas fa-shopping-basket"></i>
                             <span>05</span></a>
                     </li>
                     <li>

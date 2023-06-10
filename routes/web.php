@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\CartController;
 
 use App\Http\Controllers\FrontendController;
 
@@ -46,3 +47,11 @@ Route::get('/menu', function () {
 Route::get('/menu', [FrontendController::class, 'menu']);
 
 Route::get('menu_details/{id}', [FrontendController::class, 'menu_detail']);
+
+Route::post('add-to-cart', [CartController::class, 'addFood']);
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('cart', [CartController::class, 'viewcart']);
+});
+
+Route::post('delete-cart-item', [CartController::class, 'deletefood']);
