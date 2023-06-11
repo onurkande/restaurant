@@ -12,7 +12,6 @@
                         <div class="exzoom_img_box tf__menu_details_images">
                             <ul class='exzoom_img_ul'>
                                 <li><img class="zoom ing-fluid w-100" src="{{asset('admin/foodimage/'.$records->image)}}" alt="product"></li>
-                                {{-- <li><img class="zoom ing-fluid w-100" src="images/menu2_img_2.jpg" alt="product"></li> --}}
                             </ul>
                         </div>
                         <div class="exzoom_nav"></div>
@@ -101,7 +100,17 @@
                                     <input type="text" id="quantity" placeholder="1" value="1">
                                     <button class="btn btn-success increase-quantity"><i class="fal fa-plus"></i></button>
                                 </div>
-                                <h3 id="total-price"></h3>
+                                <h3 id="total-price">
+                                    @php
+                                        if($firstPrice)
+                                        {
+                                            echo $firstPrice;
+                                        }elseif($SecondPrice)
+                                        {
+                                            echo $SecondPrice;
+                                        }
+                                    @endphp
+                                </h3>
                             </div>
                         </div>
                         <ul class="details_button_area d-flex flex-wrap">
@@ -615,10 +624,14 @@
             quantityInput.value = quantity;
             calculateTotalPrice(quantity);
         });
+
+        var h3Element = document.getElementById('total-price');
+        var priceText = h3Element.textContent;
+
         
         // Toplam fiyatı hesaplama
         function calculateTotalPrice(quantity) {
-            var price = 320; // Yemek fiyatı
+            var price = parseFloat(priceText); // Yemek fiyatı
             var totalPrice = price * quantity;
             document.getElementById('total-price').innerHTML = '$' + totalPrice.toFixed(2);
         }

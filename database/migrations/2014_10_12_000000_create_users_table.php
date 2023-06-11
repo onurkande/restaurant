@@ -20,6 +20,18 @@ return new class extends Migration
             $table->tinyInteger('role_as')->default('0');
             $table->rememberToken();
             $table->timestamps();
+            $table->string('fname');
+            $table->string('lname');
+            $table->string('cname')->nullable();
+            $table->string('country');
+            $table->longText('address1');
+            $table->longText('address2')->nullable();
+            $table->string('city');
+            $table->string('state');
+            $table->bigInteger('citycode');
+            $table->string('phone');
+            $table->longText('additionalinfo')->nullable();
+            $table->bigInteger('pincode');
         });
     }
 

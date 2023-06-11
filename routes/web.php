@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 
 use App\Http\Controllers\FrontendController;
 
@@ -52,6 +53,7 @@ Route::post('add-to-cart', [CartController::class, 'addFood']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('cart', [CartController::class, 'viewcart']);
+    Route::get('checkout', [CheckoutController::class, 'index']);
 });
 
 Route::post('delete-cart-item', [CartController::class, 'deletefood']);

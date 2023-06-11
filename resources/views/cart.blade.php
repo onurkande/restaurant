@@ -39,6 +39,7 @@
                                     </tr>
                                     @foreach ($cartitems as $item)
                                         <tr class="food_data">
+                                            @php $total = 0; @endphp
                                             <td class="tf__pro_img">
                                                 <img src="{{asset('admin/foodimage/'.$item->food->image)}}" alt="product" class="img-fluid w-100">
                                             </td>
@@ -50,15 +51,19 @@
                                                 <p>7up</p>
                                             </td>
 
+                                            @php
+                                                $price=json_decode($item->food->price, TRUE);
+                                                $firstPrice = $price[0];
+                                            @endphp
                                             <td class="tf__pro_status">
-                                                <h6>$180.00</h6>
+                                                <h6>{{$firstPrice}} {{$item->food->currency}}</h6>
                                             </td>
                                             <td class="tf__pro_select">
                                                 <input type="hidden" class="food_id" value="{{$item->food_id}}">
                                                 <div class="quentity_btn">
-                                                    <button class="btn btn-danger decrement-btn"><i class="fal fa-minus"></i></button>
+                                                    <button class="btn btn-danger  decrement-btn"><i class="fal fa-minus"></i></button>
                                                     <input type="text" name="quantity" class="qty-input" placeholder="1" value="{{$item->food_qty}}">
-                                                    <button class="btn btn-success increment-btn"><i class="fal fa-plus"></i></button>
+                                                    <button class="btn btn-success  increment-btn"><i class="fal fa-plus"></i></button>
                                                 </div>
                                             </td>
 
@@ -177,18 +182,21 @@
                                     <img src="images/cart_offer_img.jpg" alt="cart offer" class="img-fluid w-100">
                                 </div>
                             </div>
+                            @php
+                                $total += $firstPrice * $item->food_qty 
+                            @endphp
                             <div class="col-xl-5 col-md-6">
                                 <div class="tf__cart_list_footer_button_text">
                                     <h6>total cart (02)</h6>
                                     <p>subtotal: <span>$124.00</span></p>
                                     <p>delivery: <span>$00.00</span></p>
                                     <p>discount: <span>$10.00</span></p>
-                                    <p class="total"><span>total:</span> <span>$134.00</span></p>
+                                    <p class="total"><span>total:</span> <span>{{$total}}</span></p>
                                     <form>
                                         <input type="text" placeholder="Coupon Code">
                                         <button type="submit">apply</button>
                                     </form>
-                                    <a class="common_btn" href="check_out.html">checkout</a>
+                                    <a href="{{url('checkout')}}" class="common_btn" href="check_out.html">checkout</a>
                                 </div>
                             </div>
                         </div>
@@ -255,6 +263,7 @@
                     alert(response.status);
                 }
             });
-            })
+        
+        })
     </script>
 @endsection
