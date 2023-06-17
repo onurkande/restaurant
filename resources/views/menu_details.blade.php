@@ -53,66 +53,9 @@
                             <span>(201)</span>
                         </p>
                         <p class="short_description">{{$records->content}}</p>
-                        <div class="details_size">
-                            <h5>select size</h5>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="size" id="large" value="{{$firstPrice}}" checked>
-                                <label class="form-check-label" for="large">
-                                    large <span>+ {{$firstPrice}} {{$records->currency}}</span>
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="size" id="medium" value="{{$SecondPrice}}" >
-                                <label class="form-check-label" for="medium">
-                                    medium <span>+ {{$SecondPrice}} {{$records->currency}}</span>
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="size" id="small" value="{{$ThirdPrice}}">
-                                <label class="form-check-label" for="small">
-                                    small <span>+ {{$ThirdPrice}} {{$records->currency}}</span>
-                                </label>
-                            </div>
-                        </div>
 
-                        @php
-                            $extra=json_decode($records->extra, TRUE);
-                        @endphp
-
-                        <div class="details_extra_item">
-                            <h5>select option <span>(optional)</span></h5>
-                            @foreach ($extra as $key => $single)
-                                <div class="form-check">
-                                    <input class="form-check-input extra-checkbox" type="checkbox" id="{{$single}}" value="{{$extra_price[$key]}}">
-                                    <label class="form-check-label" for="{{$single}}">
-                                        {{$single}}<span>{{$extra_price[$key]}} {{$records->currency}}</span>
-                                    </label>
-                                </div>
-                            @endforeach
-                        </div>
-
-                        <div class="details_quentity">
-                            <input type="hidden" value="{{$records->id}}" class="food_id">
-                            <h5>select quentity</h5>
-                            <div class="quentity_btn_area d-flex flex-wrapa align-items-center">
-                                <div class="quentity_btn">
-                                    <button class="btn btn-danger decrease-quantity"><i class="fal fa-minus"></i></button>
-                                    <input type="text" id="quantity" placeholder="1" value="1">
-                                    <button class="btn btn-success increase-quantity"><i class="fal fa-plus"></i></button>
-                                </div>
-                                <h3 id="total-price">
-                                    @php
-                                        if($firstPrice)
-                                        {
-                                            echo $firstPrice;
-                                        }elseif($SecondPrice)
-                                        {
-                                            echo $SecondPrice;
-                                        }
-                                    @endphp
-                                </h3>
-                            </div>
-                        </div>
+                        @livewire('site.menu-details');
+                        
                         <ul class="details_button_area d-flex flex-wrap">
                             <li><a class="common_btn add-to-cart-btn" href="#">add to cart</a></li>
                             <li><a class="common_btn wishlist-btn" href="#">wishlist</a></li>
@@ -522,7 +465,7 @@
 @endsection
 
 @section('script')
-    <script>
+    {{-- <script>
         $(document).ready(function() {
            $('.add-to-cart-btn').click(function (e){
                 e.preventDefault();
@@ -549,9 +492,9 @@
                 });
            }) 
         });
-    </script>
+    </script> --}}
 
-    <script>
+    {{-- <script>
         // Fiyatları ve döviz birimini PHP'den alabilirsiniz
         var firstPrice = parseFloat("{{$firstPrice}}");
         var secondPrice = parseFloat("{{$SecondPrice}}");
@@ -635,6 +578,8 @@
             var totalPrice = price * quantity;
             document.getElementById('total-price').innerHTML = '$' + totalPrice.toFixed(2);
         }
-    </script>
+    </script> --}}
+
+    
 
 @endsection

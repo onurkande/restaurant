@@ -19,6 +19,9 @@
     <link rel="stylesheet" href="{{asset('assets/css/spacing.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/responsive.css')}}">
+
+    @livewireStyles
+    @livewireScripts
 </head>
 
 <body>
@@ -87,6 +90,7 @@
 
     <!--main/custom js-->
     <script src="{{asset('assets/js/main.js')}}"></script>
+    
 
     @yield('script')
 

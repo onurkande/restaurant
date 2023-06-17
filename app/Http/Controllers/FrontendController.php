@@ -16,8 +16,15 @@ class FrontendController extends Controller
 
     function menu_detail($id)
     {
+        global $tutulanid;
+        $tutulanid = $id;
         $records = Food::find($id);
         return view('menu_details',['records'=>$records]);
+    }
+
+    function menu_detail_livewere() {
+        global $tutulanid;
+        return $tutulanid;
     }
 
     function menu()
