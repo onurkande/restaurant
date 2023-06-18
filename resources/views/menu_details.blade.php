@@ -1,6 +1,27 @@
 @extends('layouts.main')
 @section('title','MENU')
 @section('content')
+    @if(session()->has('added_to_cart'))
+        <div class="alert alert-success" role="alert">
+            {{ session()->get('added_to_cart') }}
+        </div>
+        <script>
+            setTimeout(function() {
+                $('.alert').fadeOut();
+            }, 5000);
+        </script>
+    @endif
+
+    @if(session()->has('already_have'))
+        <div class="alert alert-primary" role="alert">
+            {{ session()->get('already_have') }}
+        </div>
+        <script>
+            setTimeout(function() {
+                $('.alert').fadeOut();
+            }, 5000);
+        </script>
+    @endif
     <!--=============================
         MENU DETAILS START
     ==============================-->
@@ -54,12 +75,7 @@
                         </p>
                         <p class="short_description">{{$records->content}}</p>
 
-                        @livewire('site.menu-details');
-                        
-                        <ul class="details_button_area d-flex flex-wrap">
-                            <li><a class="common_btn add-to-cart-btn" href="#">add to cart</a></li>
-                            <li><a class="common_btn wishlist-btn" href="#">wishlist</a></li>
-                        </ul>
+                        @livewire('site.menu-details', ['foods' => $records])
                     </div>
                 </div>
                 <div class="col-12 wow fadeInUp" data-wow-duration="1s">
@@ -462,124 +478,4 @@
     <!--=============================
         MENU DETAILS END
     ==============================-->
-@endsection
-
-@section('script')
-    {{-- <script>
-        $(document).ready(function() {
-           $('.add-to-cart-btn').click(function (e){
-                e.preventDefault();
-
-                var food_id = $(this).closest('.food_data').find('.food_id').val();
-                var food_qty = $(this).closest('.food_data').find('#quantity').val();
-
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-
-                $.ajax({
-                    method: "POST",
-                    url: "/add-to-cart",
-                    data: {
-                        'food_id': food_id,
-                        'food_qty': food_qty
-                    },
-                    success: function (response) {
-                        alert(response.status);
-                    }
-                });
-           }) 
-        });
-    </script> --}}
-
-    {{-- <script>
-        // Fiyatları ve döviz birimini PHP'den alabilirsiniz
-        var firstPrice = parseFloat("{{$firstPrice}}");
-        var secondPrice = parseFloat("{{$SecondPrice}}");
-        var thirdPrice = parseFloat("{{$ThirdPrice}}");
-        var currency = "{{$records->currency}}";
-
-        // Radio inputlarının değişimini dinleyen fonksiyon
-        function handleSizeChange() {
-            var totalPrice = 0;
-
-            // Seçili boyuta göre fiyatı güncelle
-            if (document.getElementById("large").checked) {
-                totalPrice += firstPrice;
-            } else if (document.getElementById("medium").checked) {
-                totalPrice += secondPrice;
-            } else if (document.getElementById("small").checked) {
-                totalPrice += thirdPrice;
-            }
-
-            // Checkbox inputlarını kontrol et
-            var checkboxes = document.querySelectorAll(".form-check-input[type='checkbox']");
-            checkboxes.forEach(function (checkbox) {
-                if (checkbox.checked) {
-                    var price = parseFloat(checkbox.dataset.price);
-                    totalPrice += price;
-                }
-            });
-
-            // Toplam fiyatı h3 elementine yazdır
-            document.getElementById("total-price").textContent = totalPrice.toFixed(2) + " " + currency;
-        }
-
-        // Radio inputlarının değişimini dinlemek için event listener ekle
-        var radioInputs = document.querySelectorAll(".form-check-input[type='radio']");
-        radioInputs.forEach(function (radioInput) {
-            radioInput.addEventListener("change", handleSizeChange);
-        });
-
-        // Checkbox inputlarının değişimini dinlemek için event listener ekle
-        var checkboxes = document.querySelectorAll(".form-check-input[type='checkbox']");
-        checkboxes.forEach(function (checkbox) {
-            checkbox.addEventListener("change", handleSizeChange);
-        });
-
-        // Sayfa yüklendiğinde başlangıç fiyatını ve h3 elementini güncelle
-        document.addEventListener("DOMContentLoaded", function () {
-            handleSizeChange();
-        });
-    </script>
-
-    <script>
-        // Miktarı azaltma
-        document.querySelector('.decrease-quantity').addEventListener('click', function() {
-            var quantityInput = document.getElementById('quantity');
-            var quantity = parseInt(quantityInput.value);
-            
-            if (quantity > 1) {
-                quantity--;
-                quantityInput.value = quantity;
-                calculateTotalPrice(quantity);
-            }
-        });
-
-        // Miktarı artırma
-        document.querySelector('.increase-quantity').addEventListener('click', function() {
-            var quantityInput = document.getElementById('quantity');
-            var quantity = parseInt(quantityInput.value);
-            
-            quantity++;
-            quantityInput.value = quantity;
-            calculateTotalPrice(quantity);
-        });
-
-        var h3Element = document.getElementById('total-price');
-        var priceText = h3Element.textContent;
-
-        
-        // Toplam fiyatı hesaplama
-        function calculateTotalPrice(quantity) {
-            var price = parseFloat(priceText); // Yemek fiyatı
-            var totalPrice = price * quantity;
-            document.getElementById('total-price').innerHTML = '$' + totalPrice.toFixed(2);
-        }
-    </script> --}}
-
-    
-
 @endsection

@@ -15,7 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('user_id');
             $table->string('food_id');
-            $table->string('food_qty');
+            $table->bigInteger('quantity');
+            $table->bigInteger('totalPrice');
+            $table->bigInteger('sizePricee');
+            $table->string('sizeName');
             $table->timestamps();
         });
     }

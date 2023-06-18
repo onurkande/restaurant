@@ -20,19 +20,19 @@
         <div class="details_size">
             <h5>select size</h5>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="size" id="large" value="large" wire:click="updateTotalPrice('large')">
+                <input class="form-check-input" type="radio" name="size" id="large" value="large" wire:click="sizePrice('large')">
                 <label class="form-check-label" for="large">
                     large <span>+ {{$firstPrice}} {{$foods->currency}}</span>
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="size" id="medium" value="medium" wire:click="updateTotalPrice('medium')">
+                <input class="form-check-input" type="radio" name="size" id="medium" value="medium" wire:click="sizePrice('medium')">
                 <label class="form-check-label" for="medium">
                     medium <span>+ {{$SecondPrice}} {{$foods->currency}}</span>
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="size" id="small" value="small" wire:click="updateTotalPrice('small')">
+                <input class="form-check-input" type="radio" name="size" id="small" value="small" wire:click="sizePrice('small')">
                 <label class="form-check-label" for="small">
                     small <span>+ {{$ThirdPrice}} {{$foods->currency}}</span>
                 </label>
@@ -47,7 +47,7 @@
             <h5>select option <span>(optional)</span></h5>
             @foreach ($extra as $key => $single)
                 <div class="form-check">
-                    <input class="form-check-input extra-checkbox" type="checkbox" id="{{$single}}" value="{{$extra_price[$key]}}" wire:model="extras.{{$single}}">
+                    <input class="form-check-input extra-checkbox" type="checkbox" id="{{$single}}" value="{{$extra_price[$key]}}"  wire:click="selectExtra({{$key}}, {{$extra_price[$key]}})">
                     <label class="form-check-label" for="{{$single}}">
                         {{$single}}<span>{{$extra_price[$key]}} {{$foods->currency}}</span>
                     </label>
@@ -56,17 +56,28 @@
         </div>
 
         <div class="details_quentity">
-            <input type="hidden" value="{{$foods->id}}" class="food_id">
             <h5>select quentity</h5>
             <div class="quentity_btn_area d-flex flex-wrapa align-items-center">
                 <div class="quentity_btn">
-                    <button class="btn btn-danger decrease-quantity"><i class="fal fa-minus"></i></button>
-                    <input type="text" id="quantity" placeholder="1" value="1">
-                    <button class="btn btn-success increase-quantity"><i class="fal fa-plus"></i></button>
+                    <button wire:click="decreaseQuantity" class="btn btn-danger"><i class="fal fa-minus"></i></button>
+                    <input type="text" placeholder="1" value="{{$quantity}}"  wire:model="quantity">
+                    <button wire:click="increaseQuantity" class="btn btn-success"><i class="fal fa-plus"></i></button>
                 </div>
-                <h3 id="total-price"> {{ $message }} </h3>
+                <h3 id="total-price"> {{ $totalPrice }} {{$foods->currency}} </h3>
             </div>
         </div>
-        <button wire:click="like">Like Post</button>
+
+        <ul class="details_button_area d-flex flex-wrap">
+            <form action="{{url('add-to-cart')}}" method="POST">
+                @csrf
+                <input type="hidden" name="food_id" value="{{$foods->id}}">
+                <input type="hidden" name="totalPrice" value="{{$totalPrice}}">
+                <input type="hidden" name="quantity" value="{{$quantity}}">
+                <input type="hidden" name="sizePricee" value="{{$sizePricee}}">
+                <input type="hidden" name="sizeName" value="{{$sizeName}}">
+                <li><button type="submit" class="common_btn add-to-cart-btn">add to cart</button></li>
+            </form>
+            <li><button class="common_btn wishlist-btn" href="#">wishlist</button></li>
+        </ul>
     @endif
 </div>

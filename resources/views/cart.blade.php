@@ -46,128 +46,31 @@
 
                                             <td class="tf__pro_name">
                                                 <a href="#">{{$item->food->name}}</a>
-                                                <span>medium</span>
-                                                <p>coca-cola</p>
+                                                <span>{{$item->sizeName}}</span>
+                                                <p>coca-cola  - 45 {{$item->food->currency}}</p>
                                                 <p>7up</p>
                                             </td>
 
-                                            @php
-                                                $price=json_decode($item->food->price, TRUE);
-                                                $firstPrice = $price[0];
-                                            @endphp
                                             <td class="tf__pro_status">
-                                                <h6>{{$firstPrice}} {{$item->food->currency}}</h6>
+                                                <h6>{{$item->sizePricee}} {{$item->food->currency}}</h6>
                                             </td>
                                             <td class="tf__pro_select">
                                                 <input type="hidden" class="food_id" value="{{$item->food_id}}">
                                                 <div class="quentity_btn">
                                                     <button class="btn btn-danger  decrement-btn"><i class="fal fa-minus"></i></button>
-                                                    <input type="text" name="quantity" class="qty-input" placeholder="1" value="{{$item->food_qty}}">
+                                                    <input type="text" name="quantity" class="qty-input" placeholder="1" value="{{$item->quantity}}">
                                                     <button class="btn btn-success  increment-btn"><i class="fal fa-plus"></i></button>
                                                 </div>
                                             </td>
 
                                             <td class="tf__pro_tk">
-                                                <h6>$180,00</h6>
+                                                <h6>{{$item->totalPrice}} {{$item->food->currency}}</h6>
                                             </td>
 
                                             <td class="tf__pro_icon">
                                                 <a class="delete-cart-item" href="#"><i class="far fa-times"></i></a>
                                             </td>
                                         </tr>
-                                        {{-- <tr>
-                                            <td class="tf__pro_img">
-                                                <img src="images/menu2_img_2.jpg" alt="product" class="img-fluid w-100">
-                                            </td>
-
-                                            <td class="tf__pro_name">
-                                                <a href="#">Chicken Masala</a>
-                                                <span>small</span>
-                                            </td>
-                                            <td class="tf__pro_status">
-                                                <h6>$140.00</h6>
-                                            </td>
-
-                                            <td class="tf__pro_select">
-                                                <div class="quentity_btn">
-                                                    <button class="btn btn-danger"><i class="fal fa-minus"></i></button>
-                                                    <input type="text" placeholder="1">
-                                                    <button class="btn btn-success"><i class="fal fa-plus"></i></button>
-                                                </div>
-                                            </td>
-
-                                            <td class="tf__pro_tk">
-                                                <h6>$140,00</h6>
-                                            </td>
-
-                                            <td class="tf__pro_icon">
-                                                <a href="#"><i class="far fa-times"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tf__pro_img">
-                                                <img src="images/menu2_img_3.jpg" alt="product" class="img-fluid w-100">
-                                            </td>
-
-                                            <td class="tf__pro_name">
-                                                <a href="#">Daria Shevtsova</a>
-                                                <span>large</span>
-                                                <p>coca-cola</p>
-                                                <p>7up</p>
-                                            </td>
-
-
-                                            <td class="tf__pro_status">
-                                                <h6>$220.00</h6>
-                                            </td>
-
-                                            <td class="tf__pro_select">
-                                                <div class="quentity_btn">
-                                                    <button class="btn btn-danger"><i class="fal fa-minus"></i></button>
-                                                    <input type="text" placeholder="1">
-                                                    <button class="btn btn-success"><i class="fal fa-plus"></i></button>
-                                                </div>
-                                            </td>
-
-                                            <td class="tf__pro_tk">
-                                                <h6>$220,00</h6>
-                                            </td>
-
-                                            <td class="tf__pro_icon">
-                                                <a href="#"><i class="far fa-times"></i></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tf__pro_img">
-                                                <img src="images/menu2_img_4.jpg" alt="product" class="img-fluid w-100">
-                                            </td>
-
-                                            <td class="tf__pro_name">
-                                                <a href="#">Hyderabadi Biryani</a>
-                                                <span>medium</span>
-                                                <p>7up</p>
-                                            </td>
-
-                                            <td class="tf__pro_status">
-                                                <h6>$150.00</h6>
-                                            </td>
-
-                                            <td class="tf__pro_select">
-                                                <div class="quentity_btn">
-                                                    <button class="btn btn-danger"><i class="fal fa-minus"></i></button>
-                                                    <input type="text" placeholder="1">
-                                                    <button class="btn btn-success"><i class="fal fa-plus"></i></button>
-                                                </div>
-                                            </td>
-
-                                            <td class="tf__pro_tk">
-                                                <h6>$150.00</h6>
-                                            </td>
-
-                                            <td class="tf__pro_icon">
-                                                <a href="#"><i class="far fa-times"></i></a>
-                                            </td>
-                                        </tr> --}}
                                     @endforeach
                                 </tbody>
                             </table>
@@ -183,7 +86,7 @@
                                 </div>
                             </div>
                             @php
-                                $total += $firstPrice * $item->food_qty 
+                                //$total += $firstPrice * $item->food_qty 
                             @endphp
                             <div class="col-xl-5 col-md-6">
                                 <div class="tf__cart_list_footer_button_text">

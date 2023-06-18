@@ -12,7 +12,10 @@ class CartController extends Controller
     function addFood(Request $request)
     {
         $food_id = $request->input('food_id');
-        $food_qty = $request->input('food_qty');
+        $quantity = $request->input('quantity');
+        $totalPrice = $request->input('totalPrice');
+        $sizePricee = $request->input('sizePricee');
+        $sizeName = $request->input('sizeName');
 
         if(Auth::check())
         {
@@ -22,15 +25,20 @@ class CartController extends Controller
             {
                 if(Cart::where('food_id', $food_id)->where('user_id', Auth::id())->exists())
                 {
-                    return response()->json(['status' => $food_check->name." Already Added To Cart"]);
+                    // return response()->json(['status' => $food_check->name." Already Added To Cart"]);
+                    return redirect("menu_details/$food_id")->with('already_have',"$food_check->name Already Added To Cart");
                 }else
                 {
                     $cartItem = new Cart;
-                    $cartItem->food_id = $food_id;
                     $cartItem->user_id = Auth::id();
-                    $cartItem->food_qty = $food_qty;
+                    $cartItem->food_id = $food_id;
+                    $cartItem->quantity = $quantity;
+                    $cartItem->totalPrice = $totalPrice;
+                    $cartItem->sizePricee = $sizePricee;
+                    $cartItem->sizeName = $sizeName;
                     $cartItem->save();
-                    return response()->json(['status' => $food_check->name." Added To Cart"]);
+                    // return response()->json(['status' => $food_check->name." Added To Cart"]);
+                    return redirect("menu_details/$food_id")->with('added_to_cart',"$food_check->name Added To Cart");
                 }
             }
         }else

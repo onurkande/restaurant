@@ -6,47 +6,21 @@ use Livewire\Component;
 
 class MenuDetails extends Component
 {
-    
-    public $selectedSize = '';
-    public $selectedExtras = [];
-    public $totalPrice = '';
-    public $message = '';
+    public $sizePricee = 0;
+    public $seciliPrice;
     public $foods;
-    public $idd;
-    
+    public $sizeName;
+    public $totalPrice = 0; // Toplam fiyat
+    public $extra;
+    public $extraPrice;
+    public $quantity = 1;
+
     public function render()
     {
-        $this->idd = app('App\Http\Controllers\FrontendController')->menu_detail_livewere();
-        $this->foods = Food::find($this->idd); // Food modelinden tüm yiyecekleri alır
-
-        return view('livewire.site.menu-details', [
-            'selectedSize' => $this->selectedSize,
-            'selectedExtras' => $this->selectedExtras,
-            'totalPrice' => $this->totalPrice
-        ]);
+        return view('livewire.site.menu-details');
     }
 
-    // public function totalPrice()
-    // {
-    //     // Seçilen boyutun fiyatını al
-    //     $sizePrice = $this->size ?? 0;
-
-    //     // Seçilen extra yiyeceklerin fiyatlarını topla
-    //     $extrasPrice = 0;
-    //     if ($this->extras) {
-    //         foreach ($this->extras as $extra => $price) {
-    //             if ($price) {
-    //                 $extrasPrice += $price;
-    //             }
-    //         }
-    //     }
-
-    //     // Toplam fiyatı döndür
-    //     return $sizePrice + $extrasPrice;
-    // }
-
-
-    public function updateTotalPrice($value)
+    public function sizePrice($value)
     {
         $price=json_decode($this->foods->price, TRUE);
         $firstPrice = $price[0];
@@ -59,29 +33,60 @@ class MenuDetails extends Component
 
         // Boyut seçimi değiştiğinde fiyatı güncelleyin
         if ($value === 'large') {
-            $this->totalPrice = $firstPrice; // İlgili fiyatı burada belirtin
+            $this->sizePricee = $firstPrice; // İlgili fiyatı burada belirtin
+            $this->seciliPrice = $firstPrice;
+            $this->sizeName = $value;
         } elseif ($value === 'medium') {
-            $this->totalPrice = $SecondPrice; // İlgili fiyatı burada belirtin
+            $this->sizePricee = $SecondPrice; // İlgili fiyatı burada belirtin
+            $this->seciliPrice = $SecondPrice;
+            $this->sizeName = $value;
         } elseif ($value === 'small') {
-            $this->totalPrice = $ThirdPrice; // İlgili fiyatı burada belirtin
+            $this->sizePricee = $ThirdPrice; // İlgili fiyatı burada belirtin
+            $this->seciliPrice = $ThirdPrice;
+            $this->sizeName = $value;
         }
+
+        $this->totalPrice = $this->sizePricee + $this->extraPrice;
     }
 
-    public function like()
+    public function selectExtra($key, $price)
     {
-        $this->message = 'Post liked!'; // Butona tıklandığında mesajı güncelliyoruz
+        // Burada $key ve $price parametrelerini kullanarak $extra ve $totalPrice değişkenlerini güncelleyebilirsiniz
+        // Örneğin:
+        if (isset($this->extra[$key])) {
+            // Checkbox inputu kaldırıldığında
+            unset($this->extra[$key]);
+            $this->extraPrice -= $price;
+        } else {
+            // Checkbox inputu seçildiğinde
+            $this->extra[$key] = $price;
+            $this->extraPrice += $price;
+        }
+
+        $this->totalPrice = $this->sizePricee + $this->extraPrice;
     }
 
-    public function updatedSelectedExtras($value)
+    public function increaseQuantity()
     {
-        // Ekstra seçimleri değiştiğinde fiyatı güncelleyin
-        $this->calculateTotalPrice();
+        $this->quantity++;
+        $this->sizePricee = $this->sizePricee + $this->seciliPrice;
+        $this->totalPrice = $this->sizePricee + $this->extraPrice;
     }
 
-    private function calculateTotalPrice()
+    public function decreaseQuantity()
     {
-        // Fiyat hesaplama mantığını burada gerçekleştirin
-        // Seçilen boyut, ekstralar ve fiyatları kullanarak toplam fiyatı güncelleyin
-        // Sonucu $this->totalPrice değişkenine atayın
+        if ($this->quantity > 1)
+        {
+            if ($this->totalPrice > $this->sizePricee)
+            {
+                $this->quantity--;
+                $this->sizePricee = $this->sizePricee - $this->seciliPrice;
+            }else
+            {
+                $this->quantity--;
+                $this->sizePricee = $this->sizePricee - $this->seciliPrice;
+            }
+        }
+        $this->totalPrice = $this->sizePricee + $this->extraPrice;
     }
 }
