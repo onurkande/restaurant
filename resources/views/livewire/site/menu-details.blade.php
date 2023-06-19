@@ -47,7 +47,7 @@
             <h5>select option <span>(optional)</span></h5>
             @foreach ($extra as $key => $single)
                 <div class="form-check">
-                    <input class="form-check-input extra-checkbox" type="checkbox" id="{{$single}}" value="{{$extra_price[$key]}}"  wire:click="selectExtra({{$key}}, {{$extra_price[$key]}})">
+                    <input class="form-check-input extra-checkbox" type="checkbox" id="{{$single}}" value="{{$extra_price[$key]}}"  wire:click="selectExtra({{$key}}, {{$extra_price[$key]}}, '{{$single}}')">
                     <label class="form-check-label" for="{{$single}}">
                         {{$single}}<span>{{$extra_price[$key]}} {{$foods->currency}}</span>
                     </label>
@@ -75,6 +75,14 @@
                 <input type="hidden" name="quantity" value="{{$quantity}}">
                 <input type="hidden" name="sizePricee" value="{{$sizePricee}}">
                 <input type="hidden" name="sizeName" value="{{$sizeName}}">
+                @if($selectedExtras && $selectedPrices)
+                    @foreach($selectedExtras as $single)
+                        <input type="hidden" name="selectedExtras[]" value="{{$single}}">
+                    @endforeach
+                    @foreach($selectedPrices as $single)
+                        <input type="hidden" name="selectedPrices[]" value="{{$single}}">
+                    @endforeach
+                @endif
                 <li><button type="submit" class="common_btn add-to-cart-btn">add to cart</button></li>
             </form>
             <li><button class="common_btn wishlist-btn" href="#">wishlist</button></li>

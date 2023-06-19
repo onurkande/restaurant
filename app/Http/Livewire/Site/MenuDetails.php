@@ -14,6 +14,8 @@ class MenuDetails extends Component
     public $extra;
     public $extraPrice;
     public $quantity = 1;
+    public $selectedPrices = [];
+    public $selectedExtras = [];
 
     public function render()
     {
@@ -49,7 +51,7 @@ class MenuDetails extends Component
         $this->totalPrice = $this->sizePricee + $this->extraPrice;
     }
 
-    public function selectExtra($key, $price)
+    public function selectExtra($key, $price, $single)
     {
         // Burada $key ve $price parametrelerini kullanarak $extra ve $totalPrice değişkenlerini güncelleyebilirsiniz
         // Örneğin:
@@ -57,11 +59,22 @@ class MenuDetails extends Component
             // Checkbox inputu kaldırıldığında
             unset($this->extra[$key]);
             $this->extraPrice -= $price;
+            // Seçilen fiyatı $selectedPrices dizisinden kaldır
+            $this->selectedPrices[] = array_diff($this->selectedPrices, [$price]);
+
+            // Seçilen değeri $selectedExtraValues dizisinden kaldır
+            $this->selectedExtras[] = array_diff($this->selectedExtras, [$single]);
         } else {
             // Checkbox inputu seçildiğinde
             $this->extra[$key] = $price;
             $this->extraPrice += $price;
+            // Seçilen fiyatı $selectedPrices dizisine ekle
+            $this->selectedPrices[] = $price;
+
+            // Seçilen değeri $selectedExtraValues dizisine ekle
+            $this->selectedExtras[] = $single;
         }
+        // $this->selectedExtras = array_values($this->extraNames($this->extra));
 
         $this->totalPrice = $this->sizePricee + $this->extraPrice;
     }

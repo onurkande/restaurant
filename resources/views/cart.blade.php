@@ -47,8 +47,13 @@
                                             <td class="tf__pro_name">
                                                 <a href="#">{{$item->food->name}}</a>
                                                 <span>{{$item->sizeName}}</span>
-                                                <p>coca-cola  - 45 {{$item->food->currency}}</p>
-                                                <p>7up</p>
+                                                @php
+                                                    $selectedExtras=json_decode($item->selectedExtras, TRUE);
+                                                    $selectedPrices=json_decode($item->selectedPrices, TRUE);
+                                                @endphp
+                                                @foreach($selectedExtras as $key => $single)
+                                                    <p>{{$single}}  - {{$selectedPrices[$key]}} {{$item->food->currency}}</p>
+                                                @endforeach
                                             </td>
 
                                             <td class="tf__pro_status">

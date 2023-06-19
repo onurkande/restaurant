@@ -16,6 +16,15 @@ class CartController extends Controller
         $totalPrice = $request->input('totalPrice');
         $sizePricee = $request->input('sizePricee');
         $sizeName = $request->input('sizeName');
+        $selectedExtras = $request->input('selectedExtras');
+        $selectedPrices = $request->input('selectedPrices');
+
+        // $selectedExtras = explode(",", $selectedExtras);
+        // dd(gettype($selectedExtras));
+        //dd($selectedExtras);
+
+        $selectedExtras=json_encode($selectedExtras,JSON_UNESCAPED_UNICODE);
+        $selectedPrices=json_encode($selectedPrices,JSON_UNESCAPED_UNICODE);
 
         if(Auth::check())
         {
@@ -36,6 +45,8 @@ class CartController extends Controller
                     $cartItem->totalPrice = $totalPrice;
                     $cartItem->sizePricee = $sizePricee;
                     $cartItem->sizeName = $sizeName;
+                    $cartItem->selectedExtras = $selectedExtras;
+                    $cartItem->selectedPrices = $selectedPrices;
                     $cartItem->save();
                     // return response()->json(['status' => $food_check->name." Added To Cart"]);
                     return redirect("menu_details/$food_id")->with('added_to_cart',"$food_check->name Added To Cart");
