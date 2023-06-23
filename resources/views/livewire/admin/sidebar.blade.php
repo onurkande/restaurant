@@ -40,6 +40,18 @@
               <p>Add Foods</p>
             </a>
           </li>
+          <li class="nav-item {{ Request::is('dashboard/dynamic-edit/chefs') ? 'active':'' }}">
+            <a class="nav-link" href="{{url('dashboard/dynamic-edit/chefs')}}">
+              <i class="pro-fa-sharp fa-solid fa-user-chef"></i>
+              <p>Chefs</p>
+            </a>
+          </li>
+          <li class="nav-item {{ Request::is('dashboard/dynamic-edit/add-chefs') ? 'active':'' }}">
+            <a class="nav-link" href="{{url('dashboard/dynamic-edit/add-chefs')}}">
+              <i class="fa-solid fa-plus"></i>
+              <p>Add Chefs</p>
+            </a>
+          </li>
 
         </ul>
       </div>

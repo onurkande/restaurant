@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Livewire\Site;
-use App\Models\Food;
 use Livewire\Component;
 
 class MenuDetails extends Component
