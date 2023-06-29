@@ -6,6 +6,7 @@
     use App\Http\Controllers\admin\FrontendController;
     use App\Http\Controllers\FoodController;
     use App\Http\Controllers\ChefController;
+    use App\Http\Controllers\BannerController;
     
     Route::prefix('dashboard/dynamic-edit')->group(function () {
         Route::middleware(['auth','isAdmin'])->group(function () {
@@ -31,5 +32,11 @@
             Route::get('edit-chefs/{id}', [ChefController::class, 'edit']);
             Route::put('update-chefs/{id}', [ChefController::class, 'update']);
             Route::get('delete-chefs/{id}', [ChefController::class, 'delete']);
+
+            Route::get('/banner', [BannerController::class, 'index']);
+            Route::post('/banner', [BannerController::class, 'store']);
+            Route::post('banner-update/{id}', [BannerController::class, 'update']);
+            Route::post('/banner-update', [BannerController::class, 'update']);
+            Route::get('/deleteBannerImage/{image}', [BannerController::class,'deleteImage'])->name('deleteBannerImage');
         });
     });

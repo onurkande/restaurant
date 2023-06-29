@@ -52,6 +52,12 @@
               <p>Add Chefs</p>
             </a>
           </li>
+          <li class="nav-item {{ Request::is('dashboard/dynamic-edit/banner') ? 'active':'' }}">
+            <a class="nav-link" href="{{url('dashboard/dynamic-edit/banner')}}">
+              <i class="fa-solid fa-image"></i>
+              <p>Banner</p>
+            </a>
+          </li>
 
         </ul>
       </div>
