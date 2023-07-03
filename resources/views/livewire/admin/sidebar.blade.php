@@ -58,7 +58,12 @@
               <p>Banner</p>
             </a>
           </li>
-
+          <li class="nav-item {{ Request::is('dashboard/dynamic-edit/footer') ? 'active':'' }}">
+            <a class="nav-link" href="{{url('dashboard/dynamic-edit/footer')}}">
+              <i class="fa-solid fa-shoe-prints"></i>
+              <p>Footer</p>
+            </a>
+          </li>
         </ul>
       </div>
     </div>

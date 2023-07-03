@@ -7,6 +7,7 @@
     use App\Http\Controllers\FoodController;
     use App\Http\Controllers\ChefController;
     use App\Http\Controllers\BannerController;
+    use App\Http\Controllers\FooterController;
     
     Route::prefix('dashboard/dynamic-edit')->group(function () {
         Route::middleware(['auth','isAdmin'])->group(function () {
@@ -38,5 +39,10 @@
             Route::post('banner-update/{id}', [BannerController::class, 'update']);
             Route::post('/banner-update', [BannerController::class, 'update']);
             Route::get('/deleteBannerImage/{image}', [BannerController::class,'deleteImage'])->name('deleteBannerImage');
+            Route::get('delete-banner/{id}', [BannerController::class, 'deleteBanner']);
+
+            Route::get('/footer', [FooterController::class, 'index']);
+            Route::post('/footer', [FooterController::class, 'store']);
+            Route::post('footer-update/{id}', [FooterController::class, 'update']);
         });
     });

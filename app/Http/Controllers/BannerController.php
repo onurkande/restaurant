@@ -8,11 +8,9 @@ use Illuminate\Support\Facades\File;
 
 class BannerController extends Controller
 {
-    public $tutulanid;
     function index()
     {
-        dd($this->tutulanid);
-        $records = Banner::find($this->tutulanid);
+        $records = Banner::first();
         return view('admin.banner',['records'=>$records]);
     }
     
@@ -50,10 +48,6 @@ class BannerController extends Controller
 
     function update(Request $request, $id)
     {
-        $this->tutulanid = $id;
-        // $this->index($tutulanid);
-        // $this->deleteImage($tutulanid);
-
         $banner = Banner::find($id);
         $imagePaths = [];
     
@@ -95,10 +89,9 @@ class BannerController extends Controller
     }
     
 
-    function deleteImage($image,$tutulanid)
+    function deleteImage($image)
     {
-        dd($tutulanid);
-        $banner =Banner::find(1);
+        $banner =Banner::first();
         $images = $banner->image;
         $images = json_decode($images, TRUE);
         $index = array_search($image, $images); // Resmi bulmak için array_search kullanın
@@ -115,5 +108,27 @@ class BannerController extends Controller
             File::delete($path);
         }
         return redirect('dashboard/dynamic-edit/banner')->with('deleteImage',"Image silindi");
+    }
+
+    function deleteBanner($id)
+    {
+        $banner = Banner::find($id);
+        if($banner->image)
+        {
+            $path = public_path('admin/bannerimage');
+
+            if(File::exists($path)) 
+            {
+                File::deleteDirectory($path);
+            }
+        }
+        $banner->delete();
+        return redirect('dashboard/dynamic-edit/banner')->with('delete',"banner silindi");
+    }
+
+    function view()
+    {
+        $banner = Banner::first();
+        return $banner;
     }
 }

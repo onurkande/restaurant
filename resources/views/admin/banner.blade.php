@@ -1,8 +1,54 @@
 @extends('layouts.admin')
 @section('content')
+    @if(session()->has('store'))
+        <div class="alert alert-success" role="alert">
+            {{ session()->get('store') }}
+        </div>
+        <script>
+            setTimeout(function() {
+                $('.alert').fadeOut();
+            }, 5000);
+        </script>
+    @endif
+
+    @if(session()->has('update'))
+        <div class="alert alert-primary" role="alert">
+            {{ session()->get('update') }}
+        </div>
+        <script>
+            setTimeout(function() {
+                $('.alert').fadeOut();
+            }, 5000);
+        </script>
+    @endif
+
+    @if(session()->has('delete'))
+        <div class="alert alert-danger" role="alert">
+            {{ session()->get('delete') }}
+        </div>
+        <script>
+            setTimeout(function() {
+                $('.alert').fadeOut();
+            }, 5000);
+        </script>
+    @endif
+
+    @if(session()->has('deleteImage'))
+        <div class="alert alert-danger" role="alert">
+            {{ session()->get('deleteImage') }}
+        </div>
+        <script>
+            setTimeout(function() {
+                $('.alert').fadeOut();
+            }, 5000);
+        </script>
+    @endif
+
     <div class="card">
         <div class="card-header">
-        <a href="{{url('/dashboard/dynamic-edit/deleteBannerImage/')}}"><button type="button" class="button btn btn-danger">delete banner</button></a>  
+        @if($records)
+            <a href="{{url('/dashboard/dynamic-edit/delete-banner/'.$records->id)}}"><button type="button" class="button btn btn-danger">delete banner</button></a>  
+        @endif
             <h4>Banner</h4>
         </div>
         <div class="card-body">
@@ -31,12 +77,6 @@
                         @foreach($url as $single)
                             <input type="text" class="form-control" name="url[]" value="{{$single}}">
                         @endforeach
-                        <section id="more-url">
-                        </section>
-                        <div>
-                            <a onclick="addRRows()"><button type="button">+</button></a>
-                            <a onclick="removeRRows()"><button type="button">-</button></a>
-                        </div> 
                     </div>
                 </div>
 
@@ -106,12 +146,7 @@
                     <div class="col-md-6">
                         <label for="">Download Url</label>
                         <input type="text" class="form-control" name="url[]">
-                        <section id="more-url">
-                        </section>
-                        <div>
-                            <a onclick="addRRows()"><button type="button">+</button></a>
-                            <a onclick="removeRRows()"><button type="button">-</button></a>
-                        </div> 
+                        <input type="text" class="form-control" name="url[]">
                     </div>
                 </div>
 
@@ -153,29 +188,6 @@
             const rowsSection = document.getElementById("more-image");
             const lastRows = rowsSection.querySelector("div:last-child");
             lastRows.parentElement.removeChild(lastRows);
-        }
-    </script>
-
-    <script>
-        function addRRows() {
-            const moreRows = document.getElementById('more-url');
-            const inputCount = moreRows.getElementsByTagName('input').length;
-
-            if (inputCount < 1) {
-                const row = document.createElement("div");
-                row.innerHTML = '<input type="text" class="form-control" name="url[]">';
-                moreRows.appendChild(row);
-            }
-        }
-
-        function removeRRows() {
-            const rowsSection = document.getElementById("more-url");
-            const inputCount = rowsSection.getElementsByTagName('input').length;
-
-            if (inputCount > 0) {
-                const lastRow = rowsSection.lastElementChild;
-                rowsSection.removeChild(lastRow);
-            }
         }
     </script>
 @endsection

@@ -6,8 +6,10 @@ use Livewire\Component;
 
 class Footer extends Component
 {
+    public $records;
     public function render()
     {
-        return view('livewire.site.footer');
+        $this->records=app('App\Http\Controllers\FooterController')->view();
+        return view('livewire.site.footer',['records'=>$this->records]);
     }
 }

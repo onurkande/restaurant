@@ -12,7 +12,8 @@ class FrontendController extends Controller
         $foods = app('App\Http\Controllers\FoodController')->view();
         $category = app('App\Http\Controllers\CategoryController')->view();
         $chefs = app('App\Http\Controllers\ChefController')->view();
-        return view('index', ['category' => $category,'foods' => $foods,'chefs' => $chefs]);
+        $banner = app('App\Http\Controllers\BannerController')->view();
+        return view('index', ['category' => $category,'foods' => $foods,'chefs' => $chefs,'banner' => $banner]);
     }
 
     function menu_detail($id)

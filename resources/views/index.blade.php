@@ -584,27 +584,32 @@
                 <div class="tf__download_text_bg" style="background: url(images/download_img.png);">
                     <div class="tf__download_text_overlay">
                         <div class="tf__download_text wow fadeInUp" data-wow-duration="1s">
-                            <h5>$5.00 Cashback</h5>
-                            <h2>Easy To Order Our All Food</h2>
+                            <h5>{{$banner->message}}</h5>
+                            <h2>{{$banner->title}}</h2>
                             <ul class="d-flex flex-wrap">
-                                <li>
-                                    <a href="#">
-                                        <span class="icon"><i class="fab fa-google-play"></i></span>
-                                        <p>
-                                            <span>Available on the</span>
-                                            Google Play
-                                        </p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span class="icon"><i class="fab fa-apple"></i></span>
-                                        <p>
-                                            <span>Download on the</span>
-                                            App Store
-                                        </p>
-                                    </a>
-                                </li>
+                                @php
+                                    $url = json_decode($banner->url, TRUE);
+                                @endphp
+                                @if($url)
+                                    <li>
+                                        <a href="{{$url[0]}}">
+                                            <span class="icon"><i class="fab fa-google-play"></i></span>
+                                            <p>
+                                                <span>Available on the</span>
+                                                Google Play
+                                            </p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{$url[1]}}">
+                                            <span class="icon"><i class="fab fa-apple"></i></span>
+                                            <p>
+                                                <span>Download on the</span>
+                                                App Store
+                                            </p>
+                                        </a>
+                                    </li>
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -612,31 +617,16 @@
             </div>
             <div class="col-xl-8 col-lg-8">
                 <div class="row download_slider">
-                    <div class="col-xl-3 wow fadeInUp" data-wow-duration="1s">
-                        <div class="tf__download_slider">
-                            <img src="images/download_slider_4.jpg" alt="app download" class="img-fluid w-100">
-                        </div>
-                    </div>
-                    <div class="col-xl-3 wow fadeInUp" data-wow-duration="1s">
-                        <div class="tf__download_slider">
-                            <img src="images/download_slider_3.jpg" alt="app download" class="img-fluid w-100">
-                        </div>
-                    </div>
-                    <div class="col-xl-3 wow fadeInUp" data-wow-duration="1s">
-                        <div class="tf__download_slider">
-                            <img src="images/download_slider_2.jpg" alt="app download" class="img-fluid w-100">
-                        </div>
-                    </div>
-                    <div class="col-xl-3 wow fadeInUp" data-wow-duration="1s">
-                        <div class="tf__download_slider">
-                            <img src="images/download_slider_1.jpg" alt="app download" class="img-fluid w-100">
-                        </div>
-                    </div>
-                    <div class="col-xl-3 wow fadeInUp" data-wow-duration="1s">
-                        <div class="tf__download_slider">
-                            <img src="images/download_slider_5.jpg" alt="app download" class="img-fluid w-100">
-                        </div>
-                    </div>
+                    @php
+                        $images = json_decode($banner->image, TRUE);
+                    @endphp
+                    @foreach($images as $single)
+                        <div class="col-xl-3 wow fadeInUp" data-wow-duration="1s">
+                            <div class="tf__download_slider">
+                                <img src="{{asset('admin/bannerimage/'.$single)}}" alt="app download" class="img-fluid w-100">
+                            </div>
+                        </div>  
+                    @endforeach
                 </div>
             </div>
         </div>
