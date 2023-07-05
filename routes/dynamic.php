@@ -9,6 +9,7 @@
     use App\Http\Controllers\BannerController;
     use App\Http\Controllers\FooterController;
     use App\Http\Controllers\HeaderController;
+    use App\Http\Controllers\CounterController;
     
     Route::prefix('dashboard/dynamic-edit')->group(function () {
         Route::middleware(['auth','isAdmin'])->group(function () {
@@ -49,5 +50,12 @@
             Route::get('/header', [HeaderController::class, 'index']);
             Route::post('/header', [HeaderController::class, 'store']);
             Route::post('header-update/{id}', [HeaderController::class, 'update']);
+
+            Route::get('counter', [CounterController::class, 'index']);
+            Route::get('add-counter', [CounterController::class, 'add']);
+            Route::post('insert-counter', [CounterController::class, 'store']);
+            Route::get('edit-counter/{id}', [CounterController::class, 'edit']);
+            Route::put('update-counter/{id}', [CounterController::class, 'update']);
+            Route::get('delete-counter/{id}', [CounterController::class, 'delete']);
         });
     });

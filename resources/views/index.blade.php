@@ -6,7 +6,8 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi" />
     <title>RegFood || Restaurant HTML Template</title>
-    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    {{-- <link rel="icon" type="image/png" href="images/favicon.png"> --}}
     <link rel="stylesheet" href="{{asset('assets/css/all.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/slick.css')}}">
@@ -702,50 +703,7 @@
     <!--=============================
         COUNTER START  
     ==============================-->
-    <section class="tf__counter" style="background: url(images/counter_bg.jpg);">
-        <div class="tf__counter_overlay pt_120 xs_pt_90 pb_100 xs_pb_0">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-3 col-sm-6 col-lg-3 wow fadeInUp" data-wow-duration="1s">
-                        <div class="tf__single_counter">
-                            <div class="text">
-                                <h2 class="counter">85,000</h2>
-                                <span><i class="fas fa-user"></i></span>
-                            </div>
-                            <p>customer serve</p>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-sm-6 col-lg-3 wow fadeInUp" data-wow-duration="1s">
-                        <div class="tf__single_counter">
-                            <div class="text">
-                                <h2 class="counter">120</h2>
-                                <span><i class="fas fa-hat-chef"></i></span>
-                            </div>
-                            <p>experience chef</p>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-sm-6 col-lg-3 wow fadeInUp" data-wow-duration="1s">
-                        <div class="tf__single_counter">
-                            <div class="text">
-                                <h2 class="counter">72,000</h2>
-                                <span><i class="fas fa-users"></i></span>
-                            </div>
-                            <p>happy customer</p>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-sm-6 col-lg-3 wow fadeInUp" data-wow-duration="1s">
-                        <div class="tf__single_counter">
-                            <div class="text">
-                                <h2 class="counter">30</h2>
-                                <span><i class="fas fa-trophy"></i></span>
-                            </div>
-                            <p>winning award</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    @livewire('site.counter')
     <!--=============================
         COUNTER END
     ==============================-->

@@ -70,6 +70,18 @@
               <p>Header</p>
             </a>
           </li>
+          <li class="nav-item {{ Request::is('dashboard/dynamic-edit/counter') ? 'active':'' }}">
+            <a class="nav-link" href="{{url('dashboard/dynamic-edit/counter')}}">
+              <i class="fa-solid fa-lines-leaning"></i>
+              <p>Counter</p>
+            </a>
+          </li>
+          <li class="nav-item {{ Request::is('dashboard/dynamic-edit/add-counter') ? 'active':'' }}">
+            <a class="nav-link" href="{{url('dashboard/dynamic-edit/add-counter')}}">
+              <i class="fa-solid fa-plus"></i>
+              <p>Add Counter</p>
+            </a>
+          </li>
         </ul>
       </div>
     </div>

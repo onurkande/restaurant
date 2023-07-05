@@ -35,7 +35,7 @@
     
     <div class="card">
         <div class="card-header">
-            <h4>Footer</h4>
+            <h4>Header</h4>
         </div>
         <div class="card-body">
         @if($records)
