@@ -8,6 +8,7 @@
     use App\Http\Controllers\ChefController;
     use App\Http\Controllers\BannerController;
     use App\Http\Controllers\FooterController;
+    use App\Http\Controllers\HeaderController;
     
     Route::prefix('dashboard/dynamic-edit')->group(function () {
         Route::middleware(['auth','isAdmin'])->group(function () {
@@ -44,5 +45,9 @@
             Route::get('/footer', [FooterController::class, 'index']);
             Route::post('/footer', [FooterController::class, 'store']);
             Route::post('footer-update/{id}', [FooterController::class, 'update']);
+
+            Route::get('/header', [HeaderController::class, 'index']);
+            Route::post('/header', [HeaderController::class, 'store']);
+            Route::post('header-update/{id}', [HeaderController::class, 'update']);
         });
     });

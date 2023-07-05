@@ -42,7 +42,7 @@
           </li>
           <li class="nav-item {{ Request::is('dashboard/dynamic-edit/chefs') ? 'active':'' }}">
             <a class="nav-link" href="{{url('dashboard/dynamic-edit/chefs')}}">
-              <i class="pro-fa-sharp fa-solid fa-user-chef"></i>
+              <i class="fa-solid fa-vest-patches"></i>
               <p>Chefs</p>
             </a>
           </li>
@@ -62,6 +62,12 @@
             <a class="nav-link" href="{{url('dashboard/dynamic-edit/footer')}}">
               <i class="fa-solid fa-shoe-prints"></i>
               <p>Footer</p>
+            </a>
+          </li>
+          <li class="nav-item {{ Request::is('dashboard/dynamic-edit/header') ? 'active':'' }}">
+            <a class="nav-link" href="{{url('dashboard/dynamic-edit/header')}}">
+              <i class="fa-solid fa-heading"></i>
+              <p>Header</p>
             </a>
           </li>
         </ul>

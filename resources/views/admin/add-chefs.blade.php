@@ -2,7 +2,7 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h4>add category</h4>
+            <h4>add chefs</h4>
         </div>
         <div class="card-body">
             <form action="{{url('dashboard/dynamic-edit/insert-chefs')}}" method="POST" enctype="multipart/form-data">

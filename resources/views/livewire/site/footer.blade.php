@@ -16,7 +16,7 @@
                                     $iconsUrl = json_decode($records->iconsUrl, TRUE);
                                 @endphp
                                 @foreach($icons as $key=>$single)
-                                    <li><a href="{{$iconsUrl[$key]}}">{{$single}}</a></li>
+                                    <li><a href="{{$iconsUrl[$key]}}">{!!$single!!}</a></li>
                                 @endforeach
                                 </ul>
                             </div>

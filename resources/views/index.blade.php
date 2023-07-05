@@ -29,18 +29,26 @@
             <div class="row">
                 <div class="col-xl-6 col-sm-6 col-md-8">
                     <ul class="tf__topbar_info d-flex flex-wrap d-none d-sm-flex">
-                        <li><a href="mailto:example@gmail.com"><i class="fas fa-envelope"></i> examplemail@gmail.com</a>
-                        </li>
-                        <li class="d-none d-md-block"><a href="callto:123456789"><i class="fas fa-phone-alt"></i>
-                                +96487452145214</a></li>
+                        @php
+                            $infoRows = json_decode($header->infoRows, TRUE);
+                            $infoRowsUrl = json_decode($header->infoRowsUrl, TRUE);
+                            $infoRowsIcon = json_decode($header->infoRowsIcon, TRUE);
+                        @endphp
+                        @foreach($infoRows as $key=>$single)
+                            <li><a href="{{$infoRowsUrl[$key]}}">{!! $infoRowsIcon[$key] !!}{{$single}}</a>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
                 <div class="col-xl-6 col-sm-6 col-md-4">
                     <ul class="topbar_icon d-flex flex-wrap">
-                        <li><a href="#"><i class="fab fa-facebook-f"></i></a> </li>
-                        <li><a href="#"><i class="fab fa-twitter"></i></a> </li>
-                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a> </li>
-                        <li><a href="#"><i class="fab fa-behance"></i></a> </li>
+                        @php
+                            $icons = json_decode($header->icons, TRUE);
+                            $iconsUrl = json_decode($header->iconsUrl, TRUE);
+                        @endphp
+                        @foreach($icons as $key=>$single)
+                            <li><a href="{{$iconsUrl[$key]}}">{!!$single!!}</a> </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
@@ -56,8 +64,8 @@
     ==============================-->
     <nav class="navbar navbar-expand-lg main_menu">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <img src="images/logo.png" alt="RegFood" class="img-fluid">
+            <a class="navbar-brand" href="{{$header->imageUrl}}">
+                <img src="{{asset('admin/headerimage/'.$header->image)}}" alt="Website" class="img-fluid">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,42 +74,15 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav m-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.html">about</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="menu.html">menu</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="chefs.html">chefs</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">pages <i class="far fa-angle-down"></i></a>
-                        <ul class="droap_menu">
-                            <li><a href="menu_details.html">menu details</a></li>
-                            <li><a href="blog_details.html">blog details</a></li>
-                            <li><a href="cart_view.html">cart view</a></li>
-                            <li><a href="check_out.html">checkout</a></li>
-                            <li><a href="payment.html">payment</a></li>
-                            <li><a href="testimonial.html">testimonial</a></li>
-                            <li><a href="404.html">404/Error</a></li>
-                            <li><a href="faq.html">FAQs</a></li>
-                            <li><a href="sign_in.html">sign in</a></li>
-                            <li><a href="sign_up.html">sign up</a></li>
-                            <li><a href="forgot_password.html">forgot password</a></li>
-                            <li><a href="privacy_policy.html">privacy policy</a></li>
-                            <li><a href="terms_condition.html">terms and condition</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="blogs.html">blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">contact</a>
-                    </li>
+                    @php
+                        $pages = json_decode($header->pages, TRUE);
+                        $pagesUrl = json_decode($header->pagesUrl, TRUE);
+                    @endphp
+                    @foreach($pages as $key=>$single)
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::is($pagesUrl[$key]) ? 'active':'' }}" aria-current="page" href="{{$pagesUrl[$key]}}">{{$single}}</a>
+                        </li>
+                    @endforeach
                 </ul>
                 <ul class="menu_icon d-flex flex-wrap">
                     <li>
@@ -126,22 +107,22 @@
     <section class="tf__banner">
         <div class="tf__banner_overlay">
             <span class="banner_shape_1">
-                <img src="images/tree_5.png" alt="shape" class="img-fluid w-100">
+                <img src="{{asset('admin/headerimage/tree_5.png')}}" alt="shape" class="img-fluid w-100">
             </span>
             <span class="banner_shape_2">
-                <img src="images/tree_3.png" alt="shape" class="img-fluid w-100">
+                <img src="{{asset('admin/headerimage/tree_3.png')}}" alt="shape" class="img-fluid w-100">
             </span>
             <span class="banner_shape_3">
-                <img src="images/tree_4.png" alt="shape" class="img-fluid w-100">
+                <img src="{{asset('admin/headerimage/tree_4.png')}}" alt="shape" class="img-fluid w-100">
             </span>
             <span class="banner_shape_4">
-                <img src="images/tree_6.png" alt="shape" class="img-fluid w-100">
+                <img src="{{asset('admin/headerimage/tree_6.png')}}" alt="shape" class="img-fluid w-100">
             </span>
             <span class="banner_shape_5">
-                <img src="images/tree_7.png" alt="shape" class="img-fluid w-100">
+                <img src="{{asset('admin/headerimage/tree_7.png')}}" alt="shape" class="img-fluid w-100">
             </span>
             <span class="banner_shape_6">
-                <img src="images/tree_2.png" alt="shape" class="img-fluid w-100">
+                <img src="{{asset('admin/headerimage/tree_2.png')}}" alt="shape" class="img-fluid w-100">
             </span>
             <div class="col-12">
                 <div class="tf__banner_slider" style="background: url(images/banner_bg.jpg);">
@@ -150,22 +131,21 @@
                             <div class="row justify-content-center">
                                 <div class="col-xxl-6 col-xl-6 col-md-10 col-lg-6">
                                     <div class="tf__banner_text wow fadeInLeft" data-wow-duration="1s">
-                                        <h3>Satisfy Your Cravings</h3>
-                                        <h1>Delicious Foods With Wonderful Eating</h1>
-                                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum fugit
-                                            minimaet debitis ut distinctio optio.</p>
+                                        <h3>{{$header->indexMessage}}</h3>
+                                        <h1>{{$header->indexTitle}}</h1>
+                                        <p>{{$header->indexContent}}</p>
                                         <form>
-                                            <input type="text" placeholder="Search . . .">
-                                            <button type="submit" class="common_btn">search</button>
+                                            <input type="text" placeholder="{{$header->indexSearchName}} . . .">
+                                            <button type="submit" class="common_btn">{{$header->indexSearchName}}</button>
                                         </form>
                                     </div>
                                 </div>
                                 <div class="col-xxl-5 col-xl-6 col-sm-10 col-md-9 col-lg-6">
                                     <div class="tf__banner_img wow fadeInRight" data-wow-duration="1s">
                                         <div class="img">
-                                            <img src="images/slider_img_1.png" alt="food item" class="img-fluid w-100">
+                                            <img src="{{asset('admin/headerimage/'.$header->indexImage)}}" alt="food item" class="img-fluid w-100">
                                             <span>
-                                                35% off
+                                                {{$header->indexDiscountMessage}}
                                             </span>
                                         </div>
                                     </div>
