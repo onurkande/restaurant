@@ -60,4 +60,16 @@ class CounterController extends Controller
         $records = Counter::all();
         return $records;
     }
+
+    function deleteAll()
+    {
+        $counters = Counter::all();
+
+        foreach ($counters as $counter) {
+            $counter->delete();
+        }
+
+        return redirect('dashboard/dynamic-edit/counter')->with('delete', "counter silindi");
+    }
+
 }

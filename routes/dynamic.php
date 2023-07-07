@@ -10,6 +10,7 @@
     use App\Http\Controllers\FooterController;
     use App\Http\Controllers\HeaderController;
     use App\Http\Controllers\CounterController;
+    use App\Http\Controllers\CompanyVmgController;
     
     Route::prefix('dashboard/dynamic-edit')->group(function () {
         Route::middleware(['auth','isAdmin'])->group(function () {
@@ -57,5 +58,14 @@
             Route::get('edit-counter/{id}', [CounterController::class, 'edit']);
             Route::put('update-counter/{id}', [CounterController::class, 'update']);
             Route::get('delete-counter/{id}', [CounterController::class, 'delete']);
+            Route::get('deleteAll-counter', [CounterController::class, 'deleteAll']);
+
+            Route::get('/company_vmg', [CompanyVmgController::class, 'index']);
+            Route::get('add-company_vmg', [CompanyVmgController::class, 'add']);
+            Route::post('insert-company_vmg', [CompanyVmgController::class, 'store']);
+            Route::get('edit-company_vmg/{id}', [CompanyVmgController::class, 'edit']);
+            Route::put('update-company_vmg/{id}', [CompanyVmgController::class, 'update']);
+            Route::get('delete-company_vmg/{id}', [CompanyVmgController::class, 'delete']);
+            Route::get('deleteAll-company_vmg', [CompanyVmgController::class, 'deleteAll']);
         });
     });

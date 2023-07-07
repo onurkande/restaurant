@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     {{-- <link rel="icon" type="image/png" href="images/favicon.png"> --}}
     <link rel="stylesheet" href="{{asset('assets/css/all.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">

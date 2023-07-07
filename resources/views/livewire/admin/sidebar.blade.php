@@ -82,6 +82,18 @@
               <p>Add Counter</p>
             </a>
           </li>
+          <li class="nav-item {{ Request::is('dashboard/dynamic-edit/company_vmg') ? 'active':'' }}">
+            <a class="nav-link" href="{{url('dashboard/dynamic-edit/company_vmg')}}">
+              <i class="fa-brands fa-invision"></i>
+              <p>Company_vmg</p>
+            </a>
+          </li>
+          <li class="nav-item {{ Request::is('dashboard/dynamic-edit/add-company_vmg') ? 'active':'' }}">
+            <a class="nav-link" href="{{url('dashboard/dynamic-edit/add-company_vmg')}}">
+              <i class="fa-solid fa-plus"></i>
+              <p>Add Company_vmg</p>
+            </a>
+          </li>
         </ul>
       </div>
     </div>

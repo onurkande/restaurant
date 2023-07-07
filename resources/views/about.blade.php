@@ -47,50 +47,7 @@
         </div>
     </section>
 
-    <section class="tf__mission mt_100 xs_mt_70" style="background: url(images/mission_bg.png);">
-        <div class="tf__mission_overlay pt_70 xs_pt_40 pb_100 xs_pb_70">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-6 col-md-10 col-lg-7">
-                        <div class="tf__mission_text">
-                            <ul>
-                                <li>
-                                    <div class="icon">
-                                        <i class="far fa-bullseye-arrow"></i>
-                                    </div>
-                                    <div class="text">
-                                        <h4>vision</h4>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab corporis
-                                            perspiciatis voluptatum odit.</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="icon">
-                                        <i class="fas fa-lightbulb-on"></i>
-                                    </div>
-                                    <div class="text">
-                                        <h4>mission</h4>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab corporis
-                                            perspiciatis voluptatum odit.</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="icon">
-                                        <i class="far fa-gem"></i>
-                                    </div>
-                                    <div class="text">
-                                        <h4>goals</h4>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab corporis
-                                            perspiciatis voluptatum odit.</p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    @livewire('site.company-vmg')
 
     <section class="tf__about_choose mt_100 xs_mt_70">
         <div class="container">
