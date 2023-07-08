@@ -11,6 +11,7 @@
     use App\Http\Controllers\HeaderController;
     use App\Http\Controllers\CounterController;
     use App\Http\Controllers\CompanyVmgController;
+    use App\Http\Controllers\AboutChooseController;
     
     Route::prefix('dashboard/dynamic-edit')->group(function () {
         Route::middleware(['auth','isAdmin'])->group(function () {
@@ -67,5 +68,11 @@
             Route::put('update-company_vmg/{id}', [CompanyVmgController::class, 'update']);
             Route::get('delete-company_vmg/{id}', [CompanyVmgController::class, 'delete']);
             Route::get('deleteAll-company_vmg', [CompanyVmgController::class, 'deleteAll']);
+
+            Route::get('/about_choose', [AboutChooseController::class, 'index']);
+            Route::post('/about_choose', [AboutChooseController::class, 'store']);
+            Route::post('about_choose-update/{id}', [AboutChooseController::class, 'update']);
+            Route::get('deleteAll-about_choose/{id}', [AboutChooseController::class, 'deleteAboutChoose']);
+            Route::get('delete-about_choose/{title}', [AboutChooseController::class, 'deleteRow']);
         });
     });

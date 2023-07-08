@@ -94,6 +94,12 @@
               <p>Add Company_vmg</p>
             </a>
           </li>
+          <li class="nav-item {{ Request::is('dashboard/dynamic-edit/about_choose') ? 'active':'' }}">
+            <a class="nav-link" href="{{url('dashboard/dynamic-edit/about_choose')}}">
+              <i class="fa-solid fa-info"></i>
+              <p>About Choose</p>
+            </a>
+          </li>
         </ul>
       </div>
     </div>
