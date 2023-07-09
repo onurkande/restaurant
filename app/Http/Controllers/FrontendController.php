@@ -36,4 +36,10 @@ class FrontendController extends Controller
         $foods = app('App\Http\Controllers\FoodController')->view();
         return view('menu',['foods'=>$foods]);
     }
+
+    function about()
+    {
+        $records = app('App\Http\Controllers\AboutController')->view();
+        return view('about',['records'=>$records]);
+    }
 }

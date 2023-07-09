@@ -12,6 +12,7 @@
     use App\Http\Controllers\CounterController;
     use App\Http\Controllers\CompanyVmgController;
     use App\Http\Controllers\AboutChooseController;
+    use App\Http\Controllers\AboutController;
     
     Route::prefix('dashboard/dynamic-edit')->group(function () {
         Route::middleware(['auth','isAdmin'])->group(function () {
@@ -74,5 +75,11 @@
             Route::post('about_choose-update/{id}', [AboutChooseController::class, 'update']);
             Route::get('deleteAll-about_choose/{id}', [AboutChooseController::class, 'deleteAboutChoose']);
             Route::get('delete-about_choose/{title}', [AboutChooseController::class, 'deleteRow']);
+
+            Route::get('/about', [AboutController::class, 'index']);
+            Route::post('/about', [AboutController::class, 'store']);
+            Route::post('about-update/{id}', [AboutController::class, 'update']);
+            Route::get('delete-about/{title}', [AboutController::class, 'deleteRow']);
+            Route::get('deleteAll-about/{id}', [AboutController::class, 'deleteAbout']);
         });
     });

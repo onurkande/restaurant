@@ -6,6 +6,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\AboutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,9 +26,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/', [FrontendController::class, 'index']);
 
-Route::get('/about', function () {
-    return view('about');
-});
+// Route::get('/about', function () {
+//     return view('about');
+// });
 
 Route::get('/blogs', function () {
     return view('blogs');
@@ -57,3 +58,5 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::post('delete-cart-item', [CartController::class, 'deletefood']);
+
+Route::get('about', [FrontendController::class, 'about']);

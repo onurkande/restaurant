@@ -100,6 +100,12 @@
               <p>About Choose</p>
             </a>
           </li>
+          <li class="nav-item {{ Request::is('dashboard/dynamic-edit/about') ? 'active':'' }}">
+            <a class="nav-link" href="{{url('dashboard/dynamic-edit/about')}}">
+              <i class="fa-regular fa-address-card"></i>
+              <p>Page About</p>
+            </a>
+          </li>
         </ul>
       </div>
     </div>

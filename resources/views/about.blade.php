@@ -1,51 +1,52 @@
 @extends('layouts.main')
 @section('title','ABOUT')
 @section('content')
-    <section class="tf__about_us mt_100 xs_mt_70">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-6 col-lg-6 wow fadeInLeft" data-wow-duration="1s">
-                    <div class="tf__about_us_img">
-                        <div class="img">
-                            <img src="images/about_chef.jpg" alt="about us" class="img-fluid w-100">
+    @php
+        $recordsArray = $records->toArray();
+    @endphp
+    @if(($recordsArray))
+        <section class="tf__about_us mt_100 xs_mt_70">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 wow fadeInLeft" data-wow-duration="1s">
+                        <div class="tf__about_us_img">
+                            <div class="img">
+                                <img src="{{asset('admin/aboutImage/'.$records->image)}}" alt="about us" class="img-fluid w-100">
+                            </div>
+                            <h3><span>{{$records->info}}</span></h3>
+                            @php
+                                $messageRows = json_decode($records->messageRows, TRUE);
+                                //dd($messageRows[1][0]);
+                            @endphp
+                            <p>{{ $messageRows[0][0] ?? '' }}
+                                <span>{{ $messageRows[1][0] ?? '' }}</span>
+                            </p>
                         </div>
-                        <h3>12+ <span>Years experience</span></h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate officiis architecto
-                            reiciendis.
-                            <span>jhon deo</span>
-                        </p>
                     </div>
-                </div>
-                <div class="col-xl-6 col-lg-6 wow fadeInRight" data-wow-duration="1s">
-                    <div class="tf__section_heading mb_25">
-                        <h4>About Company</h4>
-                        <h2>Helathy Foods Provider</h2>
-                    </div>
-                    <div class="tf__about_us_text">
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate aspernatur molestiae
-                            minima pariatur consequatur voluptate sapiente deleniti soluta,.</p>
-                        <ul>
-                            <li>
-                                <h4>trusted partner</h4>
-                                <p>Lorem Ipsum Dolor Sit Amet Consectetur, Adipisicing Elit. Minus, Officiis Placeat
-                                    Iusto Quasi Adipisci Impedit Delectus Beatae Ab Maxime.</p>
-                            </li>
-                            <li>
-                                <h4>first Delivery</h4>
-                                <p>Lorem Ipsum Dolor Sit Amet Consectetur, Adipisicing Elit. Minus, Officiis Placeat
-                                    Iusto Quasi Adipisci Impedit Delectus Beatae Ab Maxime.</p>
-                            </li>
-                            <li>
-                                <h4>secure payment</h4>
-                                <p>Lorem Ipsum Dolor Sit Amet Consectetur, Adipisicing Elit. Minus, Officiis Placeat
-                                    Iusto Quasi Adipisci Impedit Delectus Beatae Ab Maxime.</p>
-                            </li>
-                        </ul>
+                    <div class="col-xl-6 col-lg-6 wow fadeInRight" data-wow-duration="1s">
+                        <div class="tf__section_heading mb_25">
+                            <h4>{{$records->message}}</h4>
+                            <h2>{{$records->title}}</h2>
+                        </div>
+                        <div class="tf__about_us_text">
+                            <p>{{$records->content}}</p>
+                            @php
+                                $rows = json_decode($records->rows, TRUE);
+                            @endphp
+                            <ul>
+                            @foreach ($rows as $single)
+                                <li>
+                                    <h4>{{ $single['title'] }}</h4>
+                                    <p>{{ $single['content'] }}</p>
+                                </li>
+                            @endforeach
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>    
+    @endif
 
     @livewire('site.company-vmg')
 
