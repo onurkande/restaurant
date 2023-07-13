@@ -18,6 +18,9 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        'Illuminate\Auth\Events\PasswordReset' => [
+            'App\Listeners\PasswordResetListener',
+        ],
     ];
 
     /**
@@ -25,7 +28,14 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $listen = [
+            Registered::class => [
+                SendEmailVerificationNotification::class,
+            ],
+            'Illuminate\Auth\Events\PasswordReset' => [
+                'App\Listeners\PasswordResetListener',
+            ],
+        ];
     }
 
     /**

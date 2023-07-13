@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
+
 class RegisterController extends Controller
 {
     /*
@@ -53,6 +54,9 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'address' => ['string', 'max:255'], // Adres için kural
+            // 'phone' => ['string', 'regex:/^(\+90|0)[0-9]{10}$/'], // Telefon için kural
+            // 'image' => ['file', 'mimes:jpg,jpeg,png'], // Resim için kural
         ]);
     }
 
@@ -64,10 +68,26 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        // // Dosyayı public/images klasörüne yükle
+        // $imagePath = null; // Resim yolu için varsayılan değer
+
+        if (isset($data['image'])) {
+            // dd('deneme');
+            $image = $data['image'];
+            $imageName = $image->getClientOriginalName();
+            $image->move('admin/userimage/',$imageName);
+            $imagePath = $imageName;
+        }
+
+        // dd($data);
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'address' => $data['address'],
+            'phone' => $data['phone'],
+            'image' => $imagePath, // Dosyanın yolunu kaydet
         ]);
     }
 }

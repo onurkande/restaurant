@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 
-class AdminMiddleware
+class AuthCheck
 {
     /**
      * Handle an incoming request.
@@ -18,19 +18,18 @@ class AdminMiddleware
     {
         if(Auth::check())
         {
-            if(Auth::user()->role_as == '1')
+            if(Auth::user()->role_as == '0')
             {
                 return $next($request);
             }
             else
             {
-                return redirect('/dashboard/dynamic-edit')->with('status','Access Denied! as you are not as admin');
+                return redirect('/dashboard-login-user')->with('status','Access Denied! as you are not as user');
             }
         }
         else
         {
-            return redirect('/home')->with('status','Please Login First');
-            // return redirect('/dashboard-login-user')->with('status','Please Login First');
+            return redirect('/dashboard-login-user')->with('status','Please Login First');
         }
     }
 }

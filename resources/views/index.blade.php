@@ -91,7 +91,7 @@
                             <span>05</span></a>
                     </li>
                     <li>
-                        <a href="dashboard.html"><i class="fas fa-user"></i></a>
+                        <a href="{{url('dashboard')}}"><i class="fas fa-user"></i></a>
                     </li>
                 </ul>
             </div>

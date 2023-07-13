@@ -60,3 +60,28 @@ Route::middleware(['auth'])->group(function () {
 Route::post('delete-cart-item', [CartController::class, 'deletefood']);
 
 Route::get('about', [FrontendController::class, 'about']);
+
+
+Route::middleware(['auth','isUser'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    });
+});
+
+Route::middleware(['guest'])->group(function () {
+    Route::get('/dashboard-create-user', function () {
+        return view('dashboard_create_user');
+    });
+    
+    Route::get('/dashboard-login-user', function () {
+        return view('dashboard_login_user');
+    })->name('dashboard-login-user');
+
+    Route::get('/dashboard-reset-password', function () {
+        return view('dashboard_reset_password');
+    });
+
+    Route::get('/dashboard-email-password', function () {
+        return view('dashboard_email_password');
+    })->name('dashboard-email-password');
+});
