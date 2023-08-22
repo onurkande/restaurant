@@ -19,8 +19,27 @@
                     wishlist</a></li>
             <li><a class="{{Request::is('reviews') ? 'active':''}}" href="dashboard_review.html"><span><i class="fas fa-star"></i></span> Reviews</a>
             </li>
-            <li><a class="{{Request::is('change-password') ? 'active':''}}" href="dashboard_change_password.html"><span><i
-                            class="fas fa-user-lock"></i></span> Change Password</a></li>
+            <li>
+                <a class="{{Request::is('change-password') ? 'active':''}}" href="dashboard_change_password.html"><span>
+                <i class="fas fa-user-lock"></i></span> Change Password</a>
+            </li>
+
+            <li>
+                <a class="{{Request::is('dashboard-blogs') ? 'active':''}}" href="{{url('dashboard-blogs')}}">
+                    <span>
+                        <i class="fa-solid fa-file-lines"></i>
+                    </span>
+                Blogs</a>
+            </li>
+
+            <li>
+                <a class="{{Request::is('dashboard-add-blog') ? 'active':''}}" href="{{url('dashboard-add-blog')}}">
+                    <span>
+                        <i class="fa-solid fa-plus"></i>
+                    </span>
+                Add Blog</a>
+            </li>
+
             <li>
             <a class="dropdown-item" href="{{ route('logout') }}"
                 onclick="event.preventDefault();

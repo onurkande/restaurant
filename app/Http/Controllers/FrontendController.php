@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Food;
+use App\Models\Blog;
 
 class FrontendController extends Controller
 {
@@ -14,7 +15,8 @@ class FrontendController extends Controller
         $chefs = app('App\Http\Controllers\ChefController')->view();
         $banner = app('App\Http\Controllers\BannerController')->view();
         $header = app('App\Http\Controllers\HeaderController')->view();
-        return view('index', ['category' => $category,'foods' => $foods,'chefs' => $chefs,'banner' => $banner,'header' => $header]);
+        $blogs = app('App\Http\Controllers\BlogController')->view();
+        return view('index', ['category' => $category,'foods' => $foods,'chefs' => $chefs,'banner' => $banner,'header' => $header,'blogs' => $blogs]);
     }
 
     function menu_detail($id)
@@ -41,5 +43,11 @@ class FrontendController extends Controller
     {
         $records = app('App\Http\Controllers\AboutController')->view();
         return view('about',['records'=>$records]);
+    }
+
+    function blog_detail($id)
+    {
+        $records = Blog::find($id);
+        return view('blog_details',['records'=>$records]);
     }
 }

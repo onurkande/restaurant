@@ -7,6 +7,7 @@ use App\Http\Controllers\CheckoutController;
 
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,11 +62,19 @@ Route::post('delete-cart-item', [CartController::class, 'deletefood']);
 
 Route::get('about', [FrontendController::class, 'about']);
 
+Route::get('blog-details/{id}', [FrontendController::class, 'blog_detail']);
 
 Route::middleware(['auth','isUser'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     });
+
+    Route::get('/dashboard-blogs', [BlogController::class, 'index']);
+    Route::get('dashboard-add-blog', [BlogController::class, 'add']);
+    Route::post('dashboard-insert-blog', [BlogController::class, 'store']);
+    Route::get('dashboard-edit-blog/{id}', [BlogController::class, 'edit']);
+    Route::put('dashboard-update-blog/{id}', [BlogController::class, 'update']);
+    Route::get('dashboard-delete-blog/{id}', [BlogController::class, 'delete']);
 });
 
 Route::middleware(['guest'])->group(function () {
