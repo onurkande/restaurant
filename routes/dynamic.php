@@ -13,6 +13,7 @@
     use App\Http\Controllers\CompanyVmgController;
     use App\Http\Controllers\AboutChooseController;
     use App\Http\Controllers\AboutController;
+    use App\Http\Controllers\BlogCategoryController;
     
     Route::prefix('dashboard/dynamic-edit')->group(function () {
         Route::middleware(['auth','isAdmin'])->group(function () {
@@ -42,7 +43,7 @@
             Route::get('/banner', [BannerController::class, 'index']);
             Route::post('/banner', [BannerController::class, 'store']);
             Route::post('banner-update/{id}', [BannerController::class, 'update']);
-            Route::post('/banner-update', [BannerController::class, 'update']);
+            // Route::post('/banner-update', [BannerController::class, 'update']);
             Route::get('/deleteBannerImage/{image}', [BannerController::class,'deleteImage'])->name('deleteBannerImage');
             Route::get('delete-banner/{id}', [BannerController::class, 'deleteBanner']);
 
@@ -81,5 +82,12 @@
             Route::post('about-update/{id}', [AboutController::class, 'update']);
             Route::get('delete-about/{title}', [AboutController::class, 'deleteRow']);
             Route::get('deleteAll-about/{id}', [AboutController::class, 'deleteAbout']);
+
+            Route::get('/blog-category', [BlogCategoryController::class, 'index']);
+            Route::get('/add-blog-category', [BlogCategoryController::class, 'add']);
+            Route::post('/insert-blog-category', [BlogCategoryController::class, 'store']);
+            Route::get('/edit-blog-category/{id}', [BlogCategoryController::class, 'edit']);
+            Route::put('/update-blog-category/{id}', [BlogCategoryController::class, 'update']);
+            Route::get('delete-blog-category/{id}', [BlogCategoryController::class, 'delete']);
         });
     });

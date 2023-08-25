@@ -740,7 +740,7 @@
                             </div>
                         </div>
                         <div class="tf__single_blog_text">
-                            <a class="category" href="#">food</a>
+                            <a class="category" href="#">{{$blog->category->name}}</a>
                             <a class="title" href="{{url('/blog-details/'.$blog->id)}}">{{$blog->title}}</a>
                             <p>{{ Str::limit($blog->content, 73) }}</p>
                             <div class="tf__single_blog_footer">

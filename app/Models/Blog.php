@@ -11,6 +11,7 @@ class Blog extends Model
     protected $table = 'blogs';
     protected $fillable = [
         'user_id',
+        'cate_id',
         'titleImage',
         'title',
         'content',
@@ -25,5 +26,10 @@ class Blog extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class)->whereNull('parent_id');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(BlogCategory::class,'cate_id','id');
     }
 }

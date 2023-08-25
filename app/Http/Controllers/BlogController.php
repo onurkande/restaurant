@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Blog;
+use App\Models\BlogCategory;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,7 +17,8 @@ class BlogController extends Controller
     }
     function add()
     {
-        return view('dashboard_add_blog');
+        $records = BlogCategory::all();
+        return view('dashboard_add_blog',['records'=>$records]);
     }
 
     function store(Request $request)
@@ -36,6 +38,7 @@ class BlogController extends Controller
         $lines = $request->input('lines');
         $lines=json_encode($lines,JSON_UNESCAPED_UNICODE);
 
+        $blog->cate_id = $request->input('cate_id');
         $blog->title = $request->input('title');
         $blog->content = $request->input('content');
 
@@ -48,8 +51,9 @@ class BlogController extends Controller
 
     function edit($id)
     {
+        $category = BlogCategory::all();
         $records = Blog::find($id);
-        return view('dashboard_edit_blog',['records'=>$records]);
+        return view('dashboard_edit_blog',['records'=>$records,'category'=>$category]);
     }
 
     public function update(Request $request, $id)
@@ -76,6 +80,7 @@ class BlogController extends Controller
         $lines = $request->input('lines');
         $lines = json_encode($lines, JSON_UNESCAPED_UNICODE);
 
+        $blog->cate_id = $request->input('cate_id');
         $blog->title = $request->input('title');
         $blog->content = $request->input('content');
         $blog->lines = $lines;

@@ -22,6 +22,17 @@
 
                                             {{-- <input type="hidden" class="form-control" name="user_id" value="{{}}"> --}}
 
+                                            <div class="row">
+                                                <div class="col-md-12 mb-3">
+                                                    <select class="form-select" name="cate_id">
+                                                        <option value="">Select a Category</option>
+                                                        @foreach ($records as $record)
+                                                            <option value="{{$record->id}}">{{ $record->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+
                                             <div  class="row">
                                                 <label for="">Title Image</label>
                                                 <div class="col-md-6">

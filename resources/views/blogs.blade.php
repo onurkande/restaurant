@@ -23,7 +23,7 @@
                                 </div>
                             </div>
                             <div class="tf__single_blog_text">
-                                <a class="category" href="#">food</a>
+                                <a class="category" href="#">{{$record->category->name}}</a>
                                 <a class="title" href="{{url('/blog-details/'.$record->id)}}">{{$record->title}}</a>
                                 <p>{{ Str::limit($record->content, 73) }}</p>
                                 <div class="tf__single_blog_footer">

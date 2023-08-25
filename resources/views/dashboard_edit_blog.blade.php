@@ -21,6 +21,17 @@
                                             @csrf
                                             @method('PUT')
 
+                                            <div class="row">
+                                                <div class="col-md-12 mb-3">
+                                                    <select class="form-select" name="cate_id">
+                                                        @foreach ($category as $single)
+                                                            <option value="{{ $single->id }}" @if ($single->id == $records->category->id) selected @endif>
+                                                                {{ $single->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
 
                                             <label for="">Title Image</label>
                                             <div  class="row">
@@ -30,7 +41,6 @@
                                                     @endif
                                                 </div>
                                             </div>
-
                                             <div  class="row">
                                                 <div class="col-md-6">
                                                     <input type="file" class="form-control" name="titleImage">

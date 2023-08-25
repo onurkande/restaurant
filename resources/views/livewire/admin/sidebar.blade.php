@@ -106,6 +106,18 @@
               <p>Page About</p>
             </a>
           </li>
+          <li class="nav-item {{ Request::is('dashboard/dynamic-edit/blog-category') ? 'active':'' }}">
+            <a class="nav-link" href="{{url('dashboard/dynamic-edit/blog-category')}}">
+              <i class="fa-solid fa-list"></i>
+              <p>Blog Category</p>
+            </a>
+          </li>
+          <li class="nav-item {{ Request::is('dashboard/dynamic-edit/add-blog-category') ? 'active':'' }}">
+            <a class="nav-link" href="{{url('dashboard/dynamic-edit/add-blog-category')}}">
+              <i class="fa-solid fa-plus"></i>
+              <p>Add Blog Category</p>
+            </a>
+          </li>
         </ul>
       </div>
     </div>
