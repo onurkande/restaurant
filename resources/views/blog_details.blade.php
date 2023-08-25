@@ -52,47 +52,20 @@
                         </div>
                     </div>
                     <div class="tf__comment mt_50 wow fadeInUp" data-wow-duration="1s">
-                        <h4>03 Comments</h4>
-                        <div class="tf__single_comment m-0 border-0">
-                            <img src="images/testimonial_img_1.jpg" alt="review" class="img-fluid">
-                            <div class="tf__single_comm_text">
-                                <h3>Michel Holder <span>29 oct 2022 </span></h3>
-                                <p>Sure there isn't anything embarrassing hiidden in the
-                                    middles of text. All erators on the Internet
-                                    tend to repeat predefined chunks</p>
-                                <a href="#">Reply <i class="fas fa-reply-all"></i></a>
-                            </div>
-                        </div>
-                        <div class="tf__single_comment">
-                            <img src="images/testimonial_img_2.jpg" alt="review" class="img-fluid">
-                            <div class="tf__single_comm_text">
-                                <h3>salina khan <span>29 oct 2022 </span></h3>
-                                <p>Sure there isn't anything embarrassing hiidden in the
-                                    middles of text. All erators on the Internet
-                                    tend to repeat predefined chunks</p>
-                                <a href="#">Reply <i class="fas fa-reply-all"></i></a>
-                            </div>
-                        </div>
-                        <div class="tf__single_comment replay">
-                            <img src="images/testimonial_img_3.jpg" alt="review" class="img-fluid">
-                            <div class="tf__single_comm_text">
-                                <h3>Mouna Sthesia <span>29 oct 2022 </span></h3>
-                                <p>Sure there isn't anything embarrassing hiidden in the
-                                    middles of text. All erators on the Internet
-                                    tend to repeat predefined chunks</p>
-                                <a href="#">Reply <i class="fas fa-reply-all"></i></a>
-                            </div>
-                        </div>
-                        <div class="tf__single_comment">
-                            <img src="images/testimonial_img_1.jpg" alt="review" class="img-fluid">
-                            <div class="tf__single_comm_text">
-                                <h3>marjan janifar <span>29 oct 2022 </span></h3>
-                                <p>Sure there isn't anything embarrassing hiidden in the
-                                    middles of text. All erators on the Internet
-                                    tend to repeat predefined chunks</p>
-                                <a href="#">Reply <i class="fas fa-reply-all"></i></a>
-                            </div>
-                        </div>
+                        @php
+                            $commentCount = $comments->count();
+                        @endphp
+                        <h4>{{$commentCount}} Comments</h4>
+                        @foreach ($comments as $comment)
+                            <div class="tf__single_comment">
+                                <img src="{{asset('admin/userimage/'.$comment->user->image)}}" alt="review" class="img-fluid">
+                                <div class="tf__single_comm_text">
+                                    <h3>{{$comment->user->name}}<span>{{$comment->created_at}}</span></h3>
+                                    <p>{{$comment->comment}}</p>
+                                    {{-- <a href="#">Reply <i class="fas fa-reply-all"></i></a> --}}
+                                </div>
+                            </div>    
+                        @endforeach
 
                         <div class="tf__pagination mt_30">
                             <div class="row">
@@ -120,9 +93,10 @@
                     <div class="comment_input mt_50 wow fadeInUp" data-wow-duration="1s">
                         <h4>Leave A Comment</h4>
                         <p>Your email address will not be published. Required fields are marked *</p>
-                        <form>
+                        <form method="POST" action="{{url('comment-add')}}">
+                            @csrf
                             <div class="row">
-                                <div class="col-xl-6 col-md-6">
+                                {{-- <div class="col-xl-6 col-md-6">
                                     <label>name</label>
                                     <div class="tf__contact_form_input">
                                         <span><i class="fas fa-user"></i></span>
@@ -135,12 +109,13 @@
                                         <span><i class="fas fa-envelope"></i></span>
                                         <input type="email" placeholder="Mail">
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="col-xl-12">
                                     <label>comment</label>
                                     <div class="tf__contact_form_input textarea">
                                         <span><i class="fas fa-pen"></i></span>
-                                        <textarea rows="5" placeholder="Your Comment"></textarea>
+                                            <input type="hidden" name="blog_id" value="{{ $records->id }}">
+                                        <textarea rows="5" placeholder="Your Comment" name="comment"></textarea>
                                     </div>
                                     <button type="submit" class="common_btn mt_20">Submit comment</button>
                                 </div>

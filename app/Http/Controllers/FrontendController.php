@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Food;
 use App\Models\Blog;
+use App\Models\Comment;
 
 class FrontendController extends Controller
 {
@@ -48,6 +49,14 @@ class FrontendController extends Controller
     function blog_detail($id)
     {
         $records = Blog::find($id);
-        return view('blog_details',['records'=>$records]);
+        $blog = Blog::findOrFail($id);
+        $comments = $blog->comments()->orderBy('created_at', 'desc')->get();
+        return view('blog_details',['records'=>$records,'comments'=>$comments]);
+    }
+
+    function blogs()
+    {
+        $records = Blog::all();
+        return view('blogs',['records'=>$records]);
     }
 }

@@ -8,6 +8,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,9 +32,11 @@ Route::get('/', [FrontendController::class, 'index']);
 //     return view('about');
 // });
 
-Route::get('/blogs', function () {
-    return view('blogs');
-});
+Route::get('/blogs', [FrontendController::class, 'blogs']);
+
+Route::get('blog-details/{id}', [FrontendController::class, 'blog_detail']);
+
+Route::post('comment-add', [CommentController::class, 'store']);
 
 Route::get('/chefs', function () {
     return view('chefs');
@@ -61,8 +64,6 @@ Route::middleware(['auth'])->group(function () {
 Route::post('delete-cart-item', [CartController::class, 'deletefood']);
 
 Route::get('about', [FrontendController::class, 'about']);
-
-Route::get('blog-details/{id}', [FrontendController::class, 'blog_detail']);
 
 Route::middleware(['auth','isUser'])->group(function () {
     Route::get('/dashboard', function () {

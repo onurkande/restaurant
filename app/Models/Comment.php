@@ -5,25 +5,29 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Blog extends Model
+class Comment extends Model
 {
     use HasFactory;
-    protected $table = 'blogs';
+
+    protected $table = 'comments';
     protected $fillable = [
         'user_id',
-        'titleImage',
-        'title',
-        'content',
-        'lines'
+        'blog_id',
+        'parent_id',
+        'comment',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class,'user_id','id');
     }
-
-    public function comments()
+    public function blog()
     {
-        return $this->hasMany(Comment::class)->whereNull('parent_id');
+        return $this->belongsTo(Blog::class,'blog_id','id');
+    }
+
+    public function replies()
+    {
+        return $this->hasMany(Comment::class,'parent_id');
     }
 }
