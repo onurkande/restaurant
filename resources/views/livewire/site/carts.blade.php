@@ -43,7 +43,7 @@
                                             </td>
 
                                             <td class="tf__pro_name">
-                                                <a href="#">{{$item->food->name}}</a>
+                                                <a href="{{url('/menu_details/'.$item->food->id)}}">{{$item->food->name}}</a>
                                                 <span>{{$item->sizeName}}</span>
                                                 @php
                                                     $selectedExtras=json_decode($item->selectedExtras, TRUE);
@@ -58,11 +58,11 @@
                                                 <h6>{{$item->sizePricee}} {{$item->food->currency}}</h6>
                                             </td>
                                             <td class="tf__pro_select">
-                                                <input type="hidden" class="food_id" value="{{$item->food_id}}">
+                                                {{-- <input type="hidden" wire:model="foodId" value="{{$item->food_id}}"> --}}
                                                 <div class="quentity_btn">
-                                                    <button class="btn btn-danger" wire:click="decreaseQuantity({{$item->food_id}})"><i class="fal fa-minus"></i></button>
-                                                    <input type="text" name="quantity" class="qty-input" placeholder="1" value="{{$item->quantity}}">
-                                                    <button class="btn btn-success" ><i class="fal fa-plus"></i></button>
+                                                    <button type="button" class="btn btn-danger" wire:loading.attr="disabled" wire:click="decreaseQuantity({{$item->id}})"><i class="fal fa-minus"></i></button>
+                                                    <input type="text" name="quantity" value="{{$item->quantity}}">
+                                                    <button type="button" class="btn btn-success" wire:loading.attr="disabled" wire:click="increaseQuantity({{$item->id}})"><i class="fal fa-plus"></i></button>
                                                 </div>
                                             </td>
 
@@ -71,7 +71,7 @@
                                             </td>
 
                                             <td class="tf__pro_icon">
-                                                <a class="delete-cart-item" href="#"><i class="far fa-times"></i></a>
+                                                <a><button type="button" class="delete-cart-item" wire:click="remoweCartItem({{$item->id}})" wire:loading.attr="disabled"><i class="far fa-times"></i></button></a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -85,7 +85,7 @@
                         <div class="row">
                             <div class="col-xl-7 col-md-6">
                                 <div class="tf__cart_list_footer_button_img">
-                                    <img src="images/cart_offer_img.jpg" alt="cart offer" class="img-fluid w-100">
+                                    <img src="{{asset('assets/images/cart_offer_img.jpg')}}" alt="cart offer" class="img-fluid w-100">
                                 </div>
                             </div>
                             @php
@@ -94,10 +94,9 @@
                             <div class="col-xl-5 col-md-6">
                                 <div class="tf__cart_list_footer_button_text">
                                     <h6>total cart (02)</h6>
-                                    <p>subtotal: <span>$124.00</span></p>
+                                    <p>subtotal: <span>{{$subtotal}}</span></p>
                                     <p>delivery: <span>$00.00</span></p>
-                                    <p>discount: <span>$10.00</span></p>
-                                    <p class="total"><span>total:</span> <span>{{$total}}</span></p>
+                                    <p class="total"><span>total:</span> <span></span></p>
                                     <form>
                                         <input type="text" placeholder="Coupon Code">
                                         <button type="submit">apply</button>

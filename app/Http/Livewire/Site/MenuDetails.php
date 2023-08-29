@@ -101,4 +101,9 @@ class MenuDetails extends Component
         }
         $this->totalPrice = $this->sizePricee + $this->extraPrice;
     }
+
+    public function addToCart()
+    {
+        $this->emit('CartAddedUpdated');
+    }
 }

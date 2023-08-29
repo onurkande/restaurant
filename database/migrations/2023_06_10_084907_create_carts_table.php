@@ -18,6 +18,7 @@ return new class extends Migration
             $table->bigInteger('quantity');
             $table->bigInteger('totalPrice');
             $table->bigInteger('sizePricee');
+            $table->bigInteger('seciliPrice');
             $table->string('sizeName');
             $table->json('selectedExtras')->nullable();
             $table->json('selectedPrices')->nullable();

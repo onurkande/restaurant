@@ -15,6 +15,7 @@ class CartController extends Controller
         $quantity = $request->input('quantity');
         $totalPrice = $request->input('totalPrice');
         $sizePricee = $request->input('sizePricee');
+        $seciliPrice = $request->input('seciliPrice');
         $sizeName = $request->input('sizeName');
         $selectedExtras = $request->input('selectedExtras');
         $selectedPrices = $request->input('selectedPrices');
@@ -44,6 +45,7 @@ class CartController extends Controller
                     $cartItem->quantity = $quantity;
                     $cartItem->totalPrice = $totalPrice;
                     $cartItem->sizePricee = $sizePricee;
+                    $cartItem->seciliPrice = $seciliPrice;
                     $cartItem->sizeName = $sizeName;
                     $cartItem->selectedExtras = $selectedExtras;
                     $cartItem->selectedPrices = $selectedPrices;

@@ -74,6 +74,7 @@
                 <input type="hidden" name="totalPrice" value="{{$totalPrice}}">
                 <input type="hidden" name="quantity" value="{{$quantity}}">
                 <input type="hidden" name="sizePricee" value="{{$sizePricee}}">
+                <input type="hidden" name="seciliPrice" value="{{$seciliPrice}}">
                 <input type="hidden" name="sizeName" value="{{$sizeName}}">
                 @if($selectedExtras && $selectedPrices)
                     @foreach($selectedExtras as $single)
@@ -83,7 +84,7 @@
                         <input type="hidden" name="selectedPrices[]" value="{{$single}}">
                     @endforeach
                 @endif
-                <li><button type="submit" class="common_btn add-to-cart-btn">add to cart</button></li>
+                <li><button wire:click="addToCart" type="submit" class="common_btn add-to-cart-btn">add to cart</button></li>
             </form>
             <li><button class="common_btn wishlist-btn" href="#">wishlist</button></li>
         </ul>

@@ -65,7 +65,7 @@
                 <ul class="menu_icon d-flex flex-wrap">
                     <li>
                         <a class="cart_icon" href="{{url('cart')}}"><i class="fas fa-shopping-basket"></i>
-                            <span>05</span></a>
+                            <span>@livewire('site.cart-count')</span></a>
                     </li>
                     <li>
                         <a href="{{url('dashboard')}}"><i class="fas fa-user"></i></a>
